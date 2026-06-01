@@ -71,7 +71,7 @@ def pnum(slide, n):
          [[(str(n), 10, LGRAY, False)]], align=PP_ALIGN.RIGHT)
 
 def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE,
-                 fsize=10.5, hsize=11):
+                 fsize=10.5, hsize=11, center_cols=(0,)):
     x = l
     for j, htxt in enumerate(headers):
         cw = col_w[j]
@@ -85,8 +85,12 @@ def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE,
         for j, cell in enumerate(row):
             cw = col_w[j]
             box(slide, x, y, cw, row_h, fill=fill, line=LINE, line_w=0.75)
-            text(slide, x + Pt(3), y, cw - Pt(6), row_h, [[(cell, fsize, GRAY, False)]],
-                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.92)
+            if j in center_cols:
+                al = PP_ALIGN.CENTER; pad = Pt(3); tw = cw - Pt(6)
+            else:
+                al = PP_ALIGN.LEFT; pad = Pt(10); tw = cw - Pt(16)
+            text(slide, x + pad, y, tw, row_h, [[(cell, fsize, GRAY, False)]],
+                 align=al, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.95)
             x += cw
         y += row_h
     return y
@@ -96,31 +100,32 @@ TOTAL = 6
 
 def tool_card(slide, l, t, w, h, name, desc, scope_lines, color=BLUE):
     box(slide, l, t, w, h, fill=WHITE, line=color, line_w=1.5, round_=True)
-    box(slide, l, t, w, Inches(0.42), fill=color, round_=True)
-    text(slide, l, t, w, Inches(0.42), [[(name, 13, WHITE, True)]],
+    box(slide, l, t, w, Inches(0.46), fill=color, round_=True)
+    text(slide, l, t, w, Inches(0.46), [[(name, 13.5, WHITE, True)]],
          align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    text(slide, l + Inches(0.15), t + Inches(0.5), w - Inches(0.3), Inches(0.55),
-         [[(desc, 10.2, GRAY, False)]], line_spacing=1.05)
-    text(slide, l + Inches(0.15), t + Inches(1.05), w - Inches(0.3), Inches(0.22),
+    text(slide, l + Inches(0.22), t + Inches(0.56), w - Inches(0.44), Inches(0.62),
+         [[(desc, 10.3, GRAY, False)]], line_spacing=1.08)
+    box(slide, l + Inches(0.22), t + Inches(1.26), w - Inches(0.44), Pt(1), fill=LINE)
+    text(slide, l + Inches(0.22), t + Inches(1.32), w - Inches(0.44), Inches(0.24),
          [[("활용 범위", 10.5, color, True)]])
-    yy = t + Inches(1.28)
+    yy = t + Inches(1.62)
     for line in scope_lines:
-        text(slide, l + Inches(0.18), yy, w - Inches(0.32), Inches(0.28),
-             [[("\u2022 " + line, 9.8, GRAY, False)]], line_spacing=1.0)
-        yy += Inches(0.3)
+        text(slide, l + Inches(0.26), yy, w - Inches(0.5), Inches(0.26),
+             [[("\u2022 " + line, 10, GRAY, False)]], line_spacing=1.0)
+        yy += Inches(0.27)
 
 # ============================================================
 # Slide 0 — 표지
 # ============================================================
 s = add_slide(); set_bg(s, NAVY)
-box(s, 0, Inches(3.9), SW, Pt(4), fill=ACCENT)
-text(s, Inches(0.9), Inches(2.0), Inches(11.5), Inches(1.4),
-     [[("Cline SR 사내 활용", 40, WHITE, True)]],
-     line_spacing=1.1)
-text(s, Inches(0.92), Inches(4.35), Inches(11.5), Inches(0.9),
+text(s, Inches(0.95), Inches(2.35), Inches(11.5), Inches(1.2),
+     [[("Cline SR 사내 활용", 42, WHITE, True)]],
+     line_spacing=1.0)
+box(s, Inches(0.97), Inches(3.78), Inches(4.6), Pt(4), fill=ACCENT)
+text(s, Inches(0.97), Inches(4.1), Inches(11.5), Inches(0.95),
      [[("NC HW 개발팀  |  Gauss · Ollama · GitHub Enterprise 연계", 16, RGBColor(0xC9,0xD8,0xEA), False)],
       [("VS Code 기반 사내 AI 코딩 환경 활용 방안", 14, LGRAY, False)]],
-     line_spacing=1.15)
+     line_spacing=1.25)
 pnum(s, 1)
 
 # ============================================================
@@ -129,8 +134,8 @@ pnum(s, 1)
 s = add_slide(); set_bg(s, WHITE)
 header(s, KICKER + "  (2/6)", "사내 도구 구성 — 설명 및 활용 범위")
 
-cw = Inches(6.05); ch = Inches(2.72); gap_x = Inches(0.2); gap_y = Inches(0.18)
-x0 = Inches(0.5); y0 = Inches(1.35)
+cw = Inches(6.07); ch = Inches(2.82); gap_x = Inches(0.21); gap_y = Inches(0.16)
+x0 = Inches(0.5); y0 = Inches(1.28)
 
 tool_card(s, x0, y0, cw, ch, "Cline SR",
     "VS Code 확장 AI 코딩 에이전트. 지시 → 계획 → 실행으로 코드 읽기·작성·수정, 터미널 명령 수행.",
@@ -160,31 +165,31 @@ pnum(s, 2)
 s = add_slide(); set_bg(s, WHITE)
 header(s, KICKER + "  (3/6)", "HW 개발 업무 — 사내 AI 환경 활용 범위")
 
-text(s, Inches(0.55), Inches(1.15), Inches(12.2), Inches(0.38),
+text(s, Inches(0.5), Inches(1.16), Inches(12.3), Inches(0.36),
      [[("목표: 정형·반복 업무를 AI가 직접 수행하도록 확대하고, 엔지니어는 설계·검증·판단에 집중", 11.5, GRAY, False)]])
 
 table_simple(
-    s, Inches(0.45), Inches(1.58),
+    s, Inches(0.5), Inches(1.6),
     ["업무 영역", "활용 내용", "주요 도구"],
     [
-        ["펌웨어·드라이버", "C/HAL·I2C/SPI/UART 코드 초안·리팩터링", "VS Code + Cline SR + Gauss"],
+        ["펌웨어·드라이버", "C/HAL·I2C/SPI/UART 코드 초안·리팩터링", "Cline SR + Gauss"],
         ["레지스터·설정", "데이터시트 기반 헤더·초기화 코드 생성", "Cline SR + Gauss"],
-        ["측정·검증 자동화", "계측기 제어·로그 수집 Python 스크립트", "Cline SR + Gauss / Ollama"],
+        ["측정·검증 자동화", "계측기 제어·로그 수집 Python 스크립트", "Cline SR + Gauss/Ollama"],
         ["데이터·로그 분석", "측정값 파싱·표·그래프·이상 패턴 정리", "Cline SR + Gauss"],
         ["문서·보고", "시험·이슈·회의·인수인계 문서 초안", "Gauss / Cline SR"],
         ["코드 리뷰·품질", "MISRA-C 스타일·예외처리·위험 구간 점검", "Cline SR + Gauss"],
         ["저장소·협업", "브랜치·PR·이슈·코드 검색·리뷰 워크플로", "GitHub Enterprise"],
-        ["레거시·HDL 보조", "구형 펌웨어 설명·testbench 초안", "Cline SR + Gauss / Ollama"],
+        ["레거시·HDL 보조", "구형 펌웨어 설명·testbench 초안", "Cline SR + Gauss/Ollama"],
     ],
-    col_w=[Inches(2.35), Inches(6.35), Inches(4.15)],
-    row_h=Inches(0.52), fsize=10.2, hsize=11
+    col_w=[Inches(2.45), Inches(6.25), Inches(3.65)],
+    row_h=Inches(0.47), fsize=10.5, hsize=11.5, center_cols=(0, 2)
 )
 
-box(s, Inches(0.45), Inches(5.95), Inches(12.4), Inches(1.05), fill=NAVY, round_=True)
-text(s, Inches(0.7), Inches(5.95), Inches(11.9), Inches(1.05),
+box(s, Inches(0.5), Inches(6.0), Inches(12.35), Inches(1.0), fill=NAVY, round_=True)
+text(s, Inches(0.75), Inches(6.0), Inches(11.85), Inches(1.0),
      [[("환경 구성 요약", 13, RGBColor(0x9F,0xC4,0xE8), True)],
       [("VS Code(IDE) + Cline SR(에이전트) + Gauss(사내 LLM) / Ollama(로컬 LLM) + GitHub Enterprise(사내 저장소)", 11.5, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.12, space_after=2)
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.14, space_after=2)
 pnum(s, 3)
 
 # ============================================================
@@ -193,9 +198,9 @@ pnum(s, 3)
 s = add_slide(); set_bg(s, WHITE)
 header(s, KICKER + "  (4/6)", "지금 당장 활용 가능한 분야")
 
-section(s, Inches(0.55), Inches(1.18), Inches(12), "즉시 적용 가능 (보안 검토 완료 환경 기준)")
+section(s, Inches(0.5), Inches(1.18), Inches(12), "즉시 적용 가능 (보안 검토 완료 환경 기준)")
 table_simple(
-    s, Inches(0.55), Inches(1.58),
+    s, Inches(0.5), Inches(1.58),
     ["분야", "활용 방법", "HW 개발 예시"],
     [
         ["코드 초안", "Cline SR이 파일 단위로 작성·수정", "센서·PMIC·충전 IC 드라이버·HAL 초안"],
@@ -206,25 +211,25 @@ table_simple(
         ["코드 점검", "규칙·패턴·누락 검토", "예외처리·매직넘버·중복 코드 지적"],
         ["Git 워크플로", "PR·이슈·코드 검색", "브랜치 관리·리뷰·이력 추적 (GitHub Enterprise)"],
     ],
-    col_w=[Inches(1.55), Inches(3.15), Inches(7.55)],
-    row_h=Inches(0.58), fsize=11, hsize=11.5
+    col_w=[Inches(1.6), Inches(3.25), Inches(7.4)],
+    row_h=Inches(0.5), fsize=11, hsize=11.5
 )
 
-yb = Inches(5.35)
-box(s, Inches(0.55), yb, Inches(6.0), Inches(1.35), fill=SKY, line=LINE, line_w=1, round_=True)
-text(s, Inches(0.78), yb, Inches(5.55), Inches(1.35),
+yb = Inches(5.62)
+box(s, Inches(0.5), yb, Inches(6.05), Inches(1.32), fill=SKY, line=LINE, line_w=1, round_=True)
+text(s, Inches(0.75), yb, Inches(5.6), Inches(1.32),
      [[("권장 운영", 13, BLUE, True)],
       [("\u2022 Gauss: 일반 코딩·문서 (고성능)", 11.5, GRAY, False)],
       [("\u2022 Ollama: 망분리·고민감 자료 (로컬)", 11.5, GRAY, False)],
       [("\u2022 긴 작업은 짧은 단위로 분할 요청", 11.5, GRAY, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
-box(s, Inches(6.75), yb, Inches(6.05), Inches(1.35), fill=NAVY, round_=True)
-text(s, Inches(6.98), yb, Inches(5.6), Inches(1.35),
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.16, space_after=3)
+box(s, Inches(6.8), yb, Inches(6.05), Inches(1.32), fill=NAVY, round_=True)
+text(s, Inches(7.05), yb, Inches(5.55), Inches(1.32),
      [[("기대 효과", 13, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("반복·정형 업무 시간 단축", 11.5, WHITE, False)],
-      [("개발자는 설계·실측·검증에 집중", 11.5, WHITE, False)],
-      [("사내 망 내 데이터 유출 없음", 11.5, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
+      [("\u2022 반복·정형 업무 시간 단축", 11.5, WHITE, False)],
+      [("\u2022 개발자는 설계·실측·검증에 집중", 11.5, WHITE, False)],
+      [("\u2022 사내 망 내 데이터 유출 없음", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.16, space_after=3)
 pnum(s, 4)
 
 # ============================================================
@@ -247,18 +252,21 @@ limits = [
      "개인 PC에 GPU가 없으면 응답·추론 속도가 현저히 느림. 대용량 코드·장문 분석은 실무 적용이 어려움."),
 ]
 
-y = Inches(1.52)
+section(s, Inches(0.5), Inches(1.16), Inches(12), "현재 환경에서 제약이 있는 영역")
+y = Inches(1.6)
 for idx, (title, desc) in enumerate(limits):
-    bh = Inches(0.88)
+    bh = Inches(0.84)
     box(s, L, y, W, bh, fill=PEACH, line=ACCENT, line_w=1.0, round_=True)
     box(s, L, y, Pt(6), bh, fill=ACCENT)
-    text(s, L + Inches(0.22), y + Inches(0.1), Inches(3.15), Inches(0.32), [[(title, 12, NAVY, True)]])
-    text(s, L + Inches(3.45), y + Inches(0.1), Inches(8.75), Inches(0.68),
-         [[(desc, 10.8, GRAY, False)]], line_spacing=1.05)
+    text(s, L + Inches(0.25), y, Inches(3.2), bh, [[(title, 12, NAVY, True)]],
+         anchor=MSO_ANCHOR.MIDDLE)
+    box(s, L + Inches(3.4), y + Inches(0.16), Pt(1), bh - Inches(0.32), fill=ACCENT)
+    text(s, L + Inches(3.6), y, Inches(8.55), bh,
+         [[(desc, 10.8, GRAY, False)]], anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.08)
     y += bh + Inches(0.1)
 
-box(s, L, Inches(6.72), W, Inches(0.48), fill=NAVY, round_=True)
-text(s, L, Inches(6.72), W, Inches(0.48),
+box(s, L, Inches(6.62), W, Inches(0.52), fill=NAVY, round_=True)
+text(s, L, Inches(6.62), W, Inches(0.52),
      [[("핵심: 보안·망분리 환경에서는 유용하나, 외부 연동·고급 문서/OCR·고속 대량 호출은 현재 구조상 제약", 11.2, WHITE, True)]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 pnum(s, 5)
@@ -270,62 +278,63 @@ s = add_slide(); set_bg(s, WHITE)
 header(s, KICKER + "  (6/6)", "사내 AI 환경 vs 외부 도구 — 대조 및 결론")
 
 # 좌: 사내 / 우: 외부
-half_w = Inches(6.05)
-gap = Inches(0.2)
-lx = Inches(0.5); rx = lx + half_w + gap; ty = Inches(1.35); th = Inches(4.85)
+half_w = Inches(6.02)
+gap = Inches(0.31)
+lx = Inches(0.5); rx = lx + half_w + gap; ty = Inches(1.32); th = Inches(4.5)
+row_step = Inches(0.485)
 
 box(s, lx, ty, half_w, th, fill=SKY, line=BLUE, line_w=2, round_=True)
-box(s, lx, ty, half_w, Inches(0.5), fill=BLUE, round_=True)
-text(s, lx, ty, half_w, Inches(0.5), [[("현재 사내 환경 (가능)", 14, WHITE, True)]],
+box(s, lx, ty, half_w, Inches(0.52), fill=BLUE, round_=True)
+text(s, lx, ty, half_w, Inches(0.52), [[("현재 사내 환경 (활용 가능)", 13.5, WHITE, True)]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 internal_items = [
     "펌웨어·드라이버·HAL 코드 초안·수정",
     "측정·검증 Python 스크립트 자동화",
     "로그·측정 데이터 파싱·표·요약",
     "시험·이슈·회의 문서 초안",
-    "사내 코드·GitHub Enterprise 기반 리뷰",
+    "GitHub Enterprise 기반 코드 리뷰·협업",
     "망분리·로컬(Ollama) 고민감 자료 처리",
-    "Gauss·Cline SR 기반 다단계 코드 작업 (호출 한도 내)",
+    "Gauss·Cline SR 다단계 작업 (호출 한도 내)",
 ]
-yy = ty + Inches(0.62)
+yy = ty + Inches(0.66)
 for item in internal_items:
-    text(s, lx + Inches(0.25), yy, half_w - Inches(0.45), Inches(0.38),
-         [[("\u2713 " + item, 11.2, GRAY, False)]], line_spacing=1.0)
-    yy += Inches(0.52)
+    text(s, lx + Inches(0.28), yy, half_w - Inches(0.5), row_step,
+         [[("\u2713  ", 11, GREEN, True), (item, 11, GRAY, False)]], line_spacing=1.0)
+    yy += row_step
 
 box(s, rx, ty, half_w, th, fill=PEACH, line=RED, line_w=2, round_=True)
-box(s, rx, ty, half_w, Inches(0.5), fill=RED, round_=True)
-text(s, rx, ty, half_w, Inches(0.5), [[("외부 도구 (인증·정책 제약)", 14, WHITE, True)]],
+box(s, rx, ty, half_w, Inches(0.52), fill=RED, round_=True)
+text(s, rx, ty, half_w, Inches(0.52), [[("외부 도구 (인증·정책 제약)", 13.5, WHITE, True)]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 external_items = [
     "외부 MCP·API·플러그인 자동 연동",
-    "ChatGPT·Gemini·Claude 등 외부 LLM 직접 연동",
+    "ChatGPT·Gemini·Claude 외부 LLM 연동",
     "웹·최신 공개 자료 실시간 검색·인용",
     "고품질 임베딩·장문 사양서 의미 검색",
     "고정밀 OCR (스캔 PDF·회로도)",
     "대량·고속 API 호출 (분당 수십~수백 회)",
     "멀티모달·에이전트 클라우드 위임 (Codex 등)",
 ]
-yy = ty + Inches(0.62)
+yy = ty + Inches(0.66)
 for item in external_items:
-    text(s, rx + Inches(0.25), yy, half_w - Inches(0.45), Inches(0.38),
-         [[("\u2717 " + item, 11.2, GRAY, False)]], line_spacing=1.0)
-    yy += Inches(0.52)
+    text(s, rx + Inches(0.28), yy, half_w - Inches(0.5), row_step,
+         [[("\u2717  ", 11, RED, True), (item, 11, GRAY, False)]], line_spacing=1.0)
+    yy += row_step
 
-# 중앙 VS
-text(s, Inches(6.35), Inches(3.2), Inches(0.65), Inches(0.5),
-     [[("VS", 16, ACCENT, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+# 중앙 VS 배지
+vc = lx + half_w + gap / 2
+box(s, vc - Inches(0.3), Inches(3.25), Inches(0.6), Inches(0.6), fill=ACCENT, round_=True)
+text(s, vc - Inches(0.3), Inches(3.25), Inches(0.6), Inches(0.6),
+     [[("VS", 14, WHITE, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 
-box(s, Inches(0.5), Inches(6.38), Inches(12.35), Inches(0.88), fill=NAVY, round_=True)
-text(s, Inches(0.75), Inches(6.38), Inches(11.85), Inches(0.88),
-     [[("결론", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("현재 사내 AI 환경에서 활용 가능한 부분은 ", 11.5, WHITE, False),
-       ("코드·스크립트 초안, 측정·로그 정리, 문서 초안, 사내 Git 기반 협업, 망분리 로컬 처리", 11.5, WHITE, True),
-       (" 이다.", 11.5, WHITE, False)],
-      [("다만 사내 조건의 한계로 불가능하거나 어려운 부분은 ", 11.5, WHITE, False),
-       ("외부 MCP·API 연동, 고품질 장문 검색·OCR, 대량 고속 호출, 외부 LLM·최신 웹 자료 자동 활용", 11.5, WHITE, True),
-       (" 이다.", 11.5, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.15, space_after=2)
+box(s, Inches(0.5), Inches(6.0), Inches(12.35), Inches(1.2), fill=NAVY, round_=True)
+text(s, Inches(0.78), Inches(6.0), Inches(11.8), Inches(1.2),
+     [[("결론", 13.5, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("\u2022 활용 가능: ", 11.3, RGBColor(0x9F,0xC4,0xE8), True),
+       ("코드·스크립트 초안, 측정·로그 정리, 문서 초안, 사내 Git 협업, 망분리 로컬 처리", 11.3, WHITE, False)],
+      [("\u2022 한계로 불가: ", 11.3, RGBColor(0xF2,0xB0,0x8A), True),
+       ("외부 MCP·API 연동, 고품질 장문 검색·OCR, 대량 고속 호출, 외부 LLM·최신 웹 자료 자동 활용", 11.3, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.2, space_after=3)
 pnum(s, 6)
 
 prs.save("HW개발팀_AI활용방안_요약.pptx")
