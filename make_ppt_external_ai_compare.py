@@ -109,57 +109,60 @@ text(s, Inches(0.9), Inches(1.8), Inches(11.5), Inches(1.5),
      line_spacing=1.1)
 text(s, Inches(0.92), Inches(4.2), Inches(11.5), Inches(0.8),
      [[("삼성전자 스마트폰 HW 개발팀  |  2026년 6월 외부 AI 도입 검토", 15, RGBColor(0xC9,0xD8,0xEA), False)],
-      [("공식 문서 + 웹 사용기 교차 검증", 13, LGRAY, False)]])
+      [("공식 문서 및 웹 사용자 평가 교차 검증", 13, LGRAY, False)]])
 pnum(s, 1)
 
-# Slide 2 — 보고 목적
+# Slide 2 — 평가 대상 및 평가 기준
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (1/17)", "보고 목적 및 평가 기준")
-section(s, Inches(0.55), Inches(1.2), Inches(6), "왜 지금 비교하나")
-text(s, Inches(0.7), Inches(1.65), Inches(12), Inches(1.0),
-     [[("2026년 6월부터 외부 AI 도입을 검토합니다. 도입 전 ChatGPT·Gemini·Claude 각각의", 13, GRAY, False)],
-      [("강점과 차이를 알아두어, 우리 팀 업무에 맞는 도구를 고르기 위한 조사입니다.", 13, GRAY, False)]],
-     line_spacing=1.12)
-section(s, Inches(0.55), Inches(2.85), Inches(6), "평가 기준 (6가지)")
-criteria = ["생산성 (코딩·문서·반복 업무)", "에이전트 (자동으로 여러 단계 수행)",
-            "문서·지식 (긴 사양서·검색·OCR)", "멀티모달 (이미지·PDF 등)",
-            "엔터프라이즈 (관리·보안·연동)", "비용·속도 (API·사용 제한)"]
-y = Inches(3.3)
+header(s, "외부 AI 3종 비교  (1/17)", "평가 대상 및 평가 기준")
+section(s, Inches(0.55), Inches(1.25), Inches(6), "평가 대상 (3종)")
+targets = [
+    ("ChatGPT", "OpenAI · GPT-5.x · 범용 / 에이전트"),
+    ("Gemini", "Google · 3.5 Flash · 장문 / 멀티모달"),
+    ("Claude", "Anthropic · Opus/Sonnet · 코딩 / 장기 에이전트"),
+]
+y = Inches(1.72)
+for name, desc in targets:
+    box(s, Inches(0.6), y, Inches(5.85), Inches(0.66), fill=SKY, line=LINE, line_w=0.8, round_=True)
+    text(s, Inches(0.8), y, Inches(1.5), Inches(0.66), [[(name, 13, NAVY, True)]], anchor=MSO_ANCHOR.MIDDLE)
+    text(s, Inches(2.2), y, Inches(4.1), Inches(0.66), [[(desc, 10.5, GRAY, False)]], anchor=MSO_ANCHOR.MIDDLE)
+    y += Inches(0.78)
+section(s, Inches(6.9), Inches(1.25), Inches(6), "평가 기준 (6개 항목)")
+criteria = ["생산성 (코딩·문서·반복 업무 자동화)", "에이전트 (다단계 작업 자동 수행)",
+            "문서·지식 (장문 사양서·검색·OCR)", "멀티모달 (이미지·PDF 처리)",
+            "엔터프라이즈 (관리·보안·연동)", "비용·속도 (API·사용 한도)"]
+y = Inches(1.7)
 for c in criteria:
-    box(s, Inches(0.7), y, Inches(5.8), Inches(0.48), fill=SKY, line=LINE, line_w=0.8, round_=True)
-    text(s, Inches(0.9), y, Inches(5.5), Inches(0.48), [[("\u2022 " + c, 12, GRAY, False)]],
+    box(s, Inches(6.95), y, Inches(5.85), Inches(0.42), fill=SKY, line=LINE, line_w=0.8, round_=True)
+    text(s, Inches(7.15), y, Inches(5.5), Inches(0.42), [[("\u2022 " + c, 11, GRAY, False)]],
          anchor=MSO_ANCHOR.MIDDLE)
-    y += Inches(0.55)
-box(s, Inches(7.0), Inches(2.85), Inches(5.75), Inches(3.5), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
-text(s, Inches(7.25), Inches(3.0), Inches(5.3), Inches(3.0),
-     [[("조사 방법", 14, ACCENT, True)],
-      [("1차: 각 회사 공식 문서", 12, GRAY, False)],
-      [("2차: 웹 사용기·비교 리뷰", 12, GRAY, False)],
-      [("(참고로 표기)", 11, LGRAY, False)],
-      [("", 8, GRAY, False)],
-      [("주의: 보안·라이선스는", 12, GRAY, False)],
-      [("별도 법무·보안 검토 필요", 12, RED, True)]],
-     line_spacing=1.08, space_after=2)
+    y += Inches(0.48)
+box(s, Inches(0.55), Inches(4.72), Inches(12.3), Inches(1.75), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
+text(s, Inches(0.8), Inches(4.86), Inches(11.85), Inches(1.5),
+     [[("조사 방법 및 유의사항", 14, ACCENT, True)],
+      [("· 1차: 각 사 공식 문서  /  2차: 웹 사용자 평가·비교 리뷰 (참고로 표기)", 12, GRAY, False)],
+      [("· 보안·라이선스는 별도 법무·보안 검토가 필요하며, 본 자료는 도입 검토용 참고 자료임", 12, RED, True)]],
+     line_spacing=1.14, space_after=3)
 pnum(s, 2)
 
 # Slide 3 — 3종 한눈에
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (2/17)", "3종 한눈에 보기")
+header(s, "외부 AI 3종 비교  (2/17)", "LLM 3종 비교 개요")
 table_simple(
     s, Inches(0.55), Inches(1.55),
-    ["AI", "한 줄 포지션", "강점 (공식·참고)", "주의"],
+    ["LLM", "포지션", "강점 (공식·참고)", "유의점"],
     [
-        ["ChatGPT", "만능형 올라운더", "추론·코딩·AgentKit·MCP·도구 생태계 최대", "범용이라 업무별 최적은 다를 수 있음"],
-        ["Gemini", "Google 연동·긴 문서", "3.5 Flash 에이전트·코딩·검색·멀티모달·속도", "Google 생태계 의존"],
+        ["ChatGPT", "범용 올라운더", "추론·코딩·AgentKit·MCP·도구 생태계 최대", "범용형으로 업무별 최적 모델은 상이"],
+        ["Gemini", "Google 연동·장문", "3.5 Flash 에이전트·코딩·검색·멀티모달·속도", "Google 생태계 의존도 높음"],
         ["Claude", "코딩·장기 에이전트", "Opus/Sonnet·1M 맥락·Claude Code·구조화 출력", "창의·범용은 ChatGPT 대비 평가 분산"],
     ],
     col_w=[Inches(1.35), Inches(2.2), Inches(5.5), Inches(3.2)],
     row_h=Inches(0.95), fsize=11, hsize=11.5
 )
-box(s, Inches(0.55), Inches(5.0), Inches(12.25), Inches(1.5), fill=NAVY, round_=True)
-text(s, Inches(0.8), Inches(5.15), Inches(11.8), Inches(1.2),
-     [[("핵심 메시지", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("세 AI 모두 '최고 하나'가 아니라, 업무 유형별로 맞는 도구가 다릅니다. 실무에서는 복수 도입·역할 분담도 흔합니다.", 12.5, WHITE, False)]],
+box(s, Inches(0.55), Inches(5.55), Inches(12.25), Inches(1.35), fill=NAVY, round_=True)
+text(s, Inches(0.8), Inches(5.68), Inches(11.8), Inches(1.1),
+     [[("핵심 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("단일 최우수 모델은 없으며, 업무 유형별 적합 모델이 상이합니다. 실무에서는 복수 도입·역할 분담이 일반적입니다.", 12.5, WHITE, False)]],
      line_spacing=1.1, space_after=2)
 pnum(s, 3)
 
@@ -175,7 +178,7 @@ bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(2.5), "사용자
     ["만능형: DevOps·인프라·프로토타입에 강점",
      "도구·플러그인 생태계가 가장 넓음",
      "엔터프라이즈 도입 사례·지원 체계 풍부"], ACCENT)
-text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 예시", 13, NAVY, True)]])
+text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 개발 활용 예시", 13, NAVY, True)]])
 text(s, Inches(0.7), Inches(4.5), Inches(12), Inches(1.2),
      [[("\u2022 측정 자동화 스크립트 초안, CI/CD 로그 분석, 회의록·시험 보고서 초안", 12, GRAY, False)],
       [("\u2022 MCP로 사내 도구 연동 검토 시 후보 (보안 승인 후)", 12, GRAY, False)]],
@@ -194,7 +197,7 @@ bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(2.5), "사용자
     ["긴 코드베이스·사양서 한 번에 분석",
      "검색·최신 정보·비용 효율 강점",
      "보안·논리 분석 맥락 이해 평가"], ACCENT)
-text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 예시", 13, NAVY, True)]])
+text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 개발 활용 예시", 13, NAVY, True)]])
 text(s, Inches(0.7), Inches(4.5), Inches(12), Inches(1.2),
      [[("\u2022 센서·PMIC 데이터시트(수백 페이지)에서 설정값 찾기", 12, GRAY, False)],
       [("\u2022 스캔 PDF·회로도 캡처 OCR 후 텍스트 정리 (공식 OCR 사례)", 12, GRAY, False)]],
@@ -213,7 +216,7 @@ bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(2.5), "사용자
     ["프로덕션 코딩 품질·가독성 우위 평가 다수",
      "멀티파일 리팩터링·레거시 코드 이해",
      "규제·보안 민감 업무 선호 사례"], ACCENT)
-text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 예시", 13, NAVY, True)]])
+text(s, Inches(0.7), Inches(4.1), Inches(12), Inches(0.4), [[("HW 개발 활용 예시", 13, NAVY, True)]])
 text(s, Inches(0.7), Inches(4.5), Inches(12), Inches(1.2),
      [[("\u2022 I2C/SPI 드라이버·HAL 코드 초안, MISRA-C 스타일 점검", 12, GRAY, False)],
       [("\u2022 옛날 펌웨어 코드 설명·인수인계 문서 초안", 12, GRAY, False)]],
@@ -245,7 +248,7 @@ pnum(s, 7)
 
 # Slide 8 — 유저 평가 조사 방법
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (7/17)", "Reddit · X · GitHub · Slack · Discord — 조사 방법")
+header(s, "사용자 평가 기반 비교  (7/17)", "Reddit · X · GitHub · Slack · Discord — 조사 방법")
 section(s, Inches(0.55), Inches(1.2), Inches(6), "수집 범위 (5개 채널)")
 text(s, Inches(0.7), Inches(1.6), Inches(5.8), Inches(2.4),
      [[("Reddit: 비교·불만 스레드, 고득표(수천 upvotes) 글", 12, GRAY, False)],
@@ -256,24 +259,24 @@ text(s, Inches(0.7), Inches(1.6), Inches(5.8), Inches(2.4),
      line_spacing=1.28)
 box(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(2.6), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
 text(s, Inches(6.95), Inches(1.5), Inches(5.65), Inches(2.3),
-     [[("주의 (한계)", 14, ACCENT, True)],
-      [("· API로 전체 수집한 것이 아님", 12, GRAY, False)],
-      [("· 개인 경험·버전·요금제에 따라 다름", 12, GRAY, False)],
-      [("· 홍보·제휴 글 혼재 가능", 12, GRAY, False)],
+     [[("조사 한계", 14, ACCENT, True)],
+      [("· API 기반 전수 수집이 아님", 12, GRAY, False)],
+      [("· 개인 경험·버전·요금제에 따라 상이", 12, GRAY, False)],
+      [("· 홍보·제휴성 게시물 혼재 가능", 12, GRAY, False)],
       [("", 6, GRAY, False)],
-      [("→ '반복되는 패턴'만 정리", 12, RED, True)]],
+      [("→ 반복되는 평가 패턴 중심으로 정리", 12, RED, True)]],
      line_spacing=1.05, space_after=2)
-section(s, Inches(0.55), Inches(4.2), Inches(12), "유저들이 공통으로 말하는 것")
+section(s, Inches(0.55), Inches(4.2), Inches(12), "사용자 공통 평가")
 text(s, Inches(0.7), Inches(4.65), Inches(12), Inches(2.2),
-     [[("\u2022 '최고 하나'보다 업무별로 여러 AI를 스택으로 쓴다", 12.5, NAVY, True)],
-      [("\u2022 공식 벤치보다 '매일 쓸 때 한도·속도·실수'가 더 중요하다", 12, GRAY, False)],
-      [("\u2022 코딩은 Claude, 긴 문서·Google 업무는 Gemini, 만능·음성은 ChatGPT", 12, GRAY, False)]],
+     [[("\u2022 단일 모델보다 업무별 복수 LLM 병행 사용이 일반적", 12.5, NAVY, True)],
+      [("\u2022 공식 벤치마크보다 실사용 시 사용 한도·속도·오류가 더 중요", 12, GRAY, False)],
+      [("\u2022 코딩은 Claude, 장문 문서·Google 연동은 Gemini, 범용·음성은 ChatGPT", 12, GRAY, False)]],
      line_spacing=1.12)
 pnum(s, 8)
 
 # Slide 9 — 플랫폼별 유저 목소리
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (8/17)", "플랫폼별에서 들리는 목소리")
+header(s, "사용자 평가 기반 비교  (8/17)", "플랫폼별 사용자 평가 요약")
 table_simple(
     s, Inches(0.55), Inches(1.4),
     ["플랫폼", "ChatGPT", "Gemini", "Claude"],
@@ -287,8 +290,8 @@ table_simple(
     col_w=[Inches(1.5), Inches(3.5), Inches(3.5), Inches(3.75)],
     row_h=Inches(0.6), fsize=11, hsize=12
 )
-box(s, Inches(0.55), Inches(4.85), Inches(12.25), Inches(1.85), fill=SKY, line=LINE, line_w=1, round_=True)
-text(s, Inches(0.8), Inches(4.98), Inches(11.8), Inches(1.6),
+box(s, Inches(0.55), Inches(5.12), Inches(12.25), Inches(1.7), fill=SKY, line=LINE, line_w=1, round_=True)
+text(s, Inches(0.8), Inches(5.24), Inches(11.8), Inches(1.5),
      [[("대표 인용 패턴 (참고)", 13, BLUE, True)],
       [("ChatGPT: \"Swiss army knife\" — 빠르고 넓지만 프로덕션 코드는 Claude가 낫다는 의견", 11.5, GRAY, False)],
       [("Gemini: \"검색 레이어\" vs \"긴 문서는 최고\" — 코딩은 평가 갈림", 11.5, GRAY, False)],
@@ -298,7 +301,7 @@ pnum(s, 9)
 
 # Slide 9b — 커뮤니티 사용기 5종 (Reddit·X·GitHub·Slack·Discord)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (9/17)", "커뮤니티 사용기 (Reddit·X·GitHub·Slack·Discord)")
+header(s, "사용자 평가 기반 비교  (9/17)", "커뮤니티 사용자 평가 (Reddit·X·GitHub·Slack·Discord)")
 table_simple(
     s, Inches(0.5), Inches(1.35),
     ["커뮤니티", "대표 사용기 · 인용 패턴 (참고)"],
@@ -311,17 +314,17 @@ table_simple(
     ],
     col_w=[Inches(1.6), Inches(10.65)], row_h=Inches(0.68), fsize=10.5, hsize=11.5
 )
-box(s, Inches(0.5), Inches(5.45), Inches(12.3), Inches(1.25), fill=NAVY, round_=True)
-text(s, Inches(0.75), Inches(5.58), Inches(11.85), Inches(1.0),
-     [[("HW팀 시사점", 13.5, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("\u2022 공통 결론: '하나만'이 아니라 업무별 스택 사용 — Reddit·X·GitHub 모두 도구 갈아타기를 권장", 11.5, WHITE, False)],
-      [("\u2022 팀 활용은 Slack 요약부터, Discord·MCP 원격 제어는 사내 보안 검토 후 (외부 연동 주의)", 11.5, WHITE, False)]],
+box(s, Inches(0.5), Inches(5.58), Inches(12.3), Inches(1.22), fill=NAVY, round_=True)
+text(s, Inches(0.75), Inches(5.69), Inches(11.85), Inches(1.0),
+     [[("HW 개발 시사점", 13.5, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("\u2022 공통 결론: 단일 모델이 아닌 업무별 병행 사용 — Reddit·X·GitHub 모두 도구 병행을 권장", 11.5, WHITE, False)],
+      [("\u2022 팀 활용은 Slack 요약부터, Discord·MCP 원격 제어는 사내 보안 검토 후 적용 (외부 연동 주의)", 11.5, WHITE, False)]],
      line_spacing=1.08, space_after=2)
 pnum(s, 10)
 
 # Slide 9c — 정량 데이터 (설문·통계) (신규)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (10/17)", "정량 데이터 (제3자 설문·통계, 참고)")
+header(s, "사용자 평가 기반 비교  (10/17)", "정량 데이터 (제3자 설문·통계, 참고)")
 table_simple(
     s, Inches(0.5), Inches(1.45),
     ["지표", "수치", "출처"],
@@ -335,17 +338,17 @@ table_simple(
     ],
     col_w=[Inches(3.0), Inches(7.0), Inches(2.3)], row_h=Inches(0.58), fsize=11, hsize=11.5
 )
-box(s, Inches(0.5), Inches(5.5), Inches(12.3), Inches(1.2), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
-text(s, Inches(0.75), Inches(5.62), Inches(11.8), Inches(1.0),
-     [[("읽는 법 (주의)", 13, ACCENT, True)],
-      [("표본·방법이 서로 다른 제3자 설문 \u2192 '순위'보다 '경향'으로 해석. ", 11.5, GRAY, False)],
+box(s, Inches(0.5), Inches(5.65), Inches(12.3), Inches(1.15), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
+text(s, Inches(0.75), Inches(5.76), Inches(11.8), Inches(0.95),
+     [[("해석 시 유의사항", 13, ACCENT, True)],
+      [("표본·방법이 상이한 제3자 설문이므로 '순위'보다 '경향'으로 해석. ", 11.5, GRAY, False)],
       [("'GPT-5 horrible' 4,600 upvotes, 해지 1.5M 등 언론 인용 수치는 공식 미검증.", 11.5, RED, False)]],
-     line_spacing=1.08, space_after=2)
+     line_spacing=1.06, space_after=2)
 pnum(s, 11)
 
 # Slide 9d — AI별 실사용 불만 상세 (신규)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (11/17)", "AI별 실사용 불만 (상세)")
+header(s, "사용자 평가 기반 비교  (11/17)", "LLM별 주요 제약 및 불만 사항")
 bullet_card(s, Inches(0.45), Inches(1.4), Inches(4.05), Inches(3.6), "ChatGPT",
     ["GPT-5 전환 후 '답 짧음·개성↓·다단계 추론↓' 대규모 불만",
      "Plus 사용 한도(주당 thinking 메시지) 체감",
@@ -363,15 +366,15 @@ bullet_card(s, Inches(8.85), Inches(1.4), Inches(4.0), Inches(3.6), "Claude",
      "상대적으로 느리고 비쌈"], RED)
 box(s, Inches(0.45), Inches(5.25), Inches(12.4), Inches(1.45), fill=NAVY, round_=True)
 text(s, Inches(0.7), Inches(5.4), Inches(11.9), Inches(1.15),
-     [[("HW팀 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("사내 Gauss의 '분당 3~4회 제한'처럼, 외부 AI도 '사용 한도'가 실무 병목이 됩니다.", 12, WHITE, False)],
-      [("\u2192 PoC에서 한도·속도·코드 신뢰도(틀린 코드 비율)를 반드시 직접 측정하세요.", 12, WHITE, False)]],
+     [[("HW 개발 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("사내 Gauss의 분당 3~4회 호출 제한과 마찬가지로, 외부 LLM도 사용 한도가 실무 병목 요인입니다.", 12, WHITE, False)],
+      [("\u2192 PoC 단계에서 사용 한도·응답 속도·코드 신뢰도(오류율)를 정량 측정 권장.", 12, WHITE, False)]],
      line_spacing=1.1, space_after=2)
 pnum(s, 12)
 
 # Slide 10 — 유저 평가 업무별 비교
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (12/17)", "업무별 유저 평가 (HW 관점)")
+header(s, "사용자 평가 기반 비교  (12/17)", "업무별 사용자 평가 (HW 개발 관점)")
 table_simple(
     s, Inches(0.55), Inches(1.48),
     ["업무", "ChatGPT", "Gemini", "Claude"],
@@ -385,23 +388,23 @@ table_simple(
     col_w=[Inches(2.2), Inches(3.2), Inches(3.2), Inches(3.55)],
     row_h=Inches(0.62), fsize=11, hsize=11.5
 )
-text(s, Inches(0.55), Inches(5.05), Inches(12.25), Inches(0.45),
-     [[("◎ = 유저 후기에서 상대적 강점으로 자주 언급 (공식 벤치 아님)", 10.5, LGRAY, False)]],
+text(s, Inches(0.55), Inches(5.28), Inches(12.25), Inches(0.4),
+     [[("◎ = 사용자 평가에서 상대적 강점으로 자주 언급 (공식 벤치마크 아님)", 10.5, LGRAY, False)]],
      align=PP_ALIGN.CENTER)
-box(s, Inches(0.55), Inches(5.55), Inches(12.25), Inches(1.35), fill=NAVY, round_=True)
-text(s, Inches(0.8), Inches(5.7), Inches(11.8), Inches(1.05),
-     [[("유저 추천 스택 (참고)", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("Claude Code(코딩) + Gemini(긴 사양서·OCR) + ChatGPT(만능·음성·빠른 질문)", 12, WHITE, False)],
-      [("HW팀 PoC: 업무별로 2주씩 써 보고 한도·속도·실수율을 직접 측정 권장", 12, WHITE, False)]],
-     line_spacing=1.1, space_after=2)
+box(s, Inches(0.55), Inches(5.72), Inches(12.25), Inches(1.18), fill=NAVY, round_=True)
+text(s, Inches(0.8), Inches(5.82), Inches(11.8), Inches(1.0),
+     [[("권장 조합 (참고)", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("Claude Code(코딩) + Gemini(장문 사양서·OCR) + ChatGPT(범용·음성·신속 질의)", 12, WHITE, False)],
+      [("PoC 권장: 업무별 2주 시범 운영 후 사용 한도·속도·오류율을 정량 측정", 12, WHITE, False)]],
+     line_spacing=1.08, space_after=2)
 pnum(s, 13)
 
 # Slide 11 — 공식 vs 유저
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (13/17)", "공식 소개 vs 유저 평가 — 차이")
+header(s, "사용자 평가 기반 비교  (13/17)", "공식 자료 vs 사용자 평가 비교")
 table_simple(
     s, Inches(0.55), Inches(1.5),
-    ["AI", "공식이 말하는 것", "유저가 추가로 말하는 것"],
+    ["LLM", "공식 자료 요지", "사용자 평가 추가 지적"],
     [
         ["ChatGPT", "GPT-5.x, AgentKit, 생태계", "만능·Codex 빠름, 한도·품질 변동"],
         ["Gemini", "3.5 Flash 벤치, Google 연동", "Workspace 편함, 코딩은 기대↓ 의견도"],
@@ -409,63 +412,71 @@ table_simple(
     ],
     col_w=[Inches(1.35), Inches(5.2), Inches(5.7)], row_h=Inches(0.95), fsize=11.5, hsize=12
 )
-box(s, Inches(0.55), Inches(5.15), Inches(12.25), Inches(1.75), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
-text(s, Inches(0.8), Inches(5.3), Inches(11.8), Inches(1.45),
-     [[("도입 시 체크리스트", 14, ACCENT, True)],
-      [("1. 공식 문서로 '기능이 되는지' 확인", 12, GRAY, False)],
-      [("2. 유저 후기로 '매일 쓸 때 불편한지' PoC에서 확인 (한도·속도·코드 검증)", 12, GRAY, False)],
-      [("3. 사내 Gauss와 역할 분리 — 외부는 보안 승인 후 고급 보조", 12, GRAY, False)]],
-     line_spacing=1.1, space_after=2)
+box(s, Inches(0.55), Inches(5.42), Inches(12.25), Inches(1.48), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
+text(s, Inches(0.8), Inches(5.5), Inches(11.8), Inches(1.32),
+     [[("도입 검토 체크리스트", 13.5, ACCENT, True)],
+      [("1. 공식 문서로 기능 지원 여부 확인  2. PoC로 일상 사용 시 제약(한도·속도·코드 품질) 검증", 11.5, GRAY, False)],
+      [("3. 사내 Gauss와 역할 분리 — 외부 LLM은 보안 승인 후 고급 보조 수단으로 운용", 11.5, GRAY, False)]],
+     line_spacing=1.12, space_after=2)
 pnum(s, 14)
 
 # Slide 12 — HW팀 시사점 + 선택 가이드
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (14/17)", "HW 개발팀 적용 및 선택 가이드")
+header(s, "외부 AI 3종 비교  (14/17)", "HW 개발 업무별 적용 가이드")
 table_simple(
     s, Inches(0.55), Inches(1.5),
-    ["업무", "우선 검토", "이유 (쉬운 말)"],
+    ["업무", "우선 검토 모델", "선정 근거"],
     [
-        ["펌웨어·드라이버 초안", "Claude, ChatGPT", "코드 구조·주석 품질 평가 높음"],
-        ["긴 데이터시트 요약", "Gemini", "긴 문서·검색이 공식 강점"],
-        ["측정 로그·표 정리", "3종 모두", "반복 정리는 모두 활용 가능"],
-        ["스캔 PDF·회로도 OCR", "Gemini", "문서·이미지 추론 공식 사례"],
-        ["다단계 자동화", "ChatGPT, Claude", "AgentKit / Claude Code"],
-        ["최종 회로·양산 판단", "사람", "AI는 보조, 실측 필수"],
+        ["펌웨어·드라이버 초안", "Claude, ChatGPT", "코드 구조·주석 품질 평가 우수"],
+        ["장문 데이터시트 요약", "Gemini", "장문 문서·검색 연동이 공식 강점"],
+        ["측정 로그·표 정리", "3종 공통", "반복 정형화 작업에 모두 활용 가능"],
+        ["스캔 PDF·회로도 OCR", "Gemini", "문서·이미지 추론 공식 사례 보유"],
+        ["다단계 자동화", "ChatGPT, Claude", "AgentKit / Claude Code 기반"],
+        ["최종 회로·양산 판단", "엔지니어", "AI는 보조 수단, 실측 검증 필수"],
     ],
     col_w=[Inches(2.8), Inches(2.5), Inches(6.95)], row_h=Inches(0.55), fsize=11, hsize=11.5
 )
-box(s, Inches(0.55), Inches(5.35), Inches(12.25), Inches(1.35), fill=SKY, line=LINE, line_w=1, round_=True)
-text(s, Inches(0.8), Inches(5.5), Inches(11.8), Inches(1.05),
-     [[("선택 가이드", 14, BLUE, True)],
-      [("코딩 중심 \u2192 Claude  |  긴 사양서·검색 \u2192 Gemini  |  범용·도구 연결 \u2192 ChatGPT", 12, GRAY, False)],
-      [("복수 도입·역할 분담 권장 (예: Claude 코딩 + Gemini 문서)", 12, GRAY, False)]],
-     line_spacing=1.1, space_after=2)
+box(s, Inches(0.55), Inches(5.5), Inches(12.25), Inches(1.25), fill=SKY, line=LINE, line_w=1, round_=True)
+text(s, Inches(0.8), Inches(5.6), Inches(11.8), Inches(1.05),
+     [[("선정 가이드", 14, BLUE, True)],
+      [("코딩 중심 \u2192 Claude  |  장문 사양서·검색 \u2192 Gemini  |  범용·도구 연동 \u2192 ChatGPT", 12, GRAY, False)],
+      [("복수 도입·역할 분담 권장 (예: Claude 코딩 + Gemini 문서 처리)", 12, GRAY, False)]],
+     line_spacing=1.08, space_after=2)
 pnum(s, 15)
 
-# Slide 13 — 결론
+# Slide 13 — 결론: LLM별 사내 활용 방안
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (15/17)", "결론 및 제언")
-cols = [
-    ("당장 PoC 가능", GREEN, ["코드·문서 초안", "측정 데이터 정리", "로그 분석", "반복 업무 자동화"]),
-    ("신중 적용", ACCENT, ["회로·부품 최종 판단", "불량 원인 확정", "양산 영향 평가"]),
-    ("개선·검토 과제", RED, ["보안·법무 승인", "사내 Gauss와 역할 분리", "팀 공통 가이드", "도구별 라이선스"]),
+header(s, "외부 AI 3종 비교  (15/17)", "결론: LLM별 사내 활용 방안")
+text(s, Inches(0.55), Inches(1.18), Inches(12.3), Inches(0.42),
+     [[("공식 자료와 사용자 사용 사례를 종합한, HW 개발 업무에서의 효율적 활용 방안입니다.", 12, GRAY, False)]])
+concl = [
+    ("ChatGPT", BLUE, ["측정 자동화·CI/CD 로그 분석 스크립트 초안 작성",
+                        "회의록·시험 보고서 등 문서 초안 신속 생성",
+                        "AgentKit·MCP 기반 사내 도구 연동 (보안 승인 후)"]),
+    ("Gemini", ACCENT, ["수백 페이지 데이터시트·사양서 요약 및 검색",
+                         "스캔 PDF·회로도 캡처 OCR 후 텍스트화",
+                         "Google Workspace 기반 문서·협업 연계"]),
+    ("Claude", GREEN, ["펌웨어·드라이버 코드 초안 및 리팩터링",
+                        "레거시 코드 분석·인수인계 문서화",
+                        "Claude Code 기반 장기 다단계 작업 수행"]),
 ]
-left = Inches(0.65); top = Inches(1.45); cw = Inches(3.95); gap = Inches(0.25); ch = Inches(3.2)
-for i, (title, color, items) in enumerate(cols):
+left = Inches(0.55); top = Inches(1.72); cw = Inches(4.02); gap = Inches(0.18); ch = Inches(2.7)
+for i, (title, color, items) in enumerate(concl):
     x = left + i * (cw + gap)
     box(s, x, top, cw, ch, fill=WHITE, line=color, line_w=1.8, round_=True)
-    box(s, x, top, cw, Inches(0.55), fill=color, round_=True)
-    text(s, x, top, cw, Inches(0.55), [[(title, 14, WHITE, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    yy = top + Inches(0.75)
+    box(s, x, top, cw, Inches(0.52), fill=color, round_=True)
+    text(s, x, top, cw, Inches(0.52), [[(title, 14, WHITE, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    yy = top + Inches(0.7)
     for item in items:
-        text(s, x + Inches(0.25), yy, cw - Inches(0.5), Inches(0.35), [[("- " + item, 11.5, GRAY, False)]])
-        yy += Inches(0.5)
-box(s, Inches(0.65), Inches(4.95), Inches(12.05), Inches(1.55), fill=NAVY, round_=True)
-text(s, Inches(0.9), Inches(5.1), Inches(11.5), Inches(1.25),
-     [[("최종 결론", 15, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("외부 AI는 사내 Gauss를 대체하기보다, 보안 검토 후 '고급 보조'로 쓰는 것이 현실적입니다.", 12.5, WHITE, False)],
-      [("6월 도입 전: 업무별 PoC 1~2건 선정 \u2192 효과·보안 측정 \u2192 팀 표준 가이드화를 제안합니다.", 12.5, WHITE, False)]],
-     line_spacing=1.1, space_after=2)
+        text(s, x + Inches(0.22), yy, cw - Inches(0.42), Inches(0.6),
+             [[("\u2022 " + item, 11, GRAY, False)]], line_spacing=1.02)
+        yy += Inches(0.62)
+box(s, Inches(0.55), Inches(4.72), Inches(12.3), Inches(1.78), fill=NAVY, round_=True)
+text(s, Inches(0.85), Inches(4.88), Inches(11.7), Inches(1.5),
+     [[("종합 결론 및 도입 제언", 15, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("· 외부 LLM은 사내 Gauss(망분리 보조)를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할을 분담합니다.", 12, WHITE, False)],
+      [("· 권장안: 업무별 PoC 1~2건 선정 \u2192 효과·보안·사용 한도 정량 측정 \u2192 팀 표준 활용 가이드 수립.", 12, WHITE, False)]],
+     line_spacing=1.14, space_after=2)
 pnum(s, 16)
 
 # Slide 13b — 중국 LLM 상위 2종 vs ChatGPT (신규, 참고)
