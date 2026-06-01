@@ -297,25 +297,27 @@ text(s, Inches(0.8), Inches(4.98), Inches(11.8), Inches(1.6),
      line_spacing=1.06, space_after=2)
 pnum(s, 9)
 
-# Slide 9b — Slack · Discord 커뮤니티 사용기 (신규)
+# Slide 9b — 커뮤니티 사용기 5종 (Reddit·X·GitHub·Slack·Discord)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (9/16)", "Slack · Discord 커뮤니티 사용기")
-bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(3.0), "Slack (팀 협업 관점)",
-    ["Slack AI: 스레드 요약·액션아이템 추출 효율 호평",
-     "ChatGPT: Slack·Git·Confluence에 RAG로 연결한 '프론트도어 비서' 사례",
-     "엔터프라이즈: 'Slack \u2192 작업(task) 자동화' 가능 여부를 비교 기준으로 둠",
-     "Gemini: Workspace·Meet 요약과 함께 묶어서 평가"], BLUE)
-bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(3.0), "Discord (개발자 커뮤니티)",
-    ["Claude Code를 Discord에서 원격 제어(MCP) — 폰으로 코딩 지시·결과 수신",
-     "AI 코딩 설문이 Discord 채널로 배포될 만큼 토론 활발 (Ivern 312명 등)",
-     "단골 주제: 도구 갈아타기 · 한도 · 비용 · 신뢰(틀린 코드)",
-     "커뮤니티 톤: '하나만 쓰지 않고 스택으로 쓴다'"], ACCENT)
-box(s, Inches(0.55), Inches(4.65), Inches(12.25), Inches(2.0), fill=NAVY, round_=True)
-text(s, Inches(0.8), Inches(4.8), Inches(11.8), Inches(1.7),
-     [[("HW팀 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("\u2022 팀 단위 활용은 Slack 요약/액션아이템부터 — 회의록·시험결과 공유에 즉시 효과", 12, WHITE, False)],
-      [("\u2022 Discord·MCP 원격 제어는 보안상 사내 정책 검토 후에만 (외부 연동 주의)", 12, WHITE, False)]],
-     line_spacing=1.12, space_after=2)
+header(s, "유저 평가 기반 비교  (9/16)", "커뮤니티 사용기 (Reddit·X·GitHub·Slack·Discord)")
+table_simple(
+    s, Inches(0.5), Inches(1.35),
+    ["커뮤니티", "대표 사용기 · 인용 패턴 (참고)"],
+    [
+        ["Reddit", "\"만능 칼(ChatGPT) vs 정밀 메스(Claude)\"; GPT-5 '답 짧다' 불만 4,600+ upvotes; Claude 한도 불만 최다"],
+        ["X·개발자", "2025~26 빌더·개발자층 Claude 이동; Codex(속도·비용·위임) vs Claude Code(코드 품질) 논쟁"],
+        ["GitHub", "Gist 비교: Claude 확장성·맥락 / Codex 샌드박스 보안; claude-code·gemini-cli Issues에 한도·자율과잉 불만"],
+        ["Slack", "Slack AI: 스레드 요약·액션아이템; ChatGPT를 RAG '프론트도어 비서'로; 'Slack \u2192 작업 자동화' 비교 기준"],
+        ["Discord", "Claude Code를 MCP로 원격 제어(폰으로 코딩 지시·수신); 도구 비교·개발자 설문 토론 활발"],
+    ],
+    col_w=[Inches(1.6), Inches(10.65)], row_h=Inches(0.68), fsize=10.5, hsize=11.5
+)
+box(s, Inches(0.5), Inches(5.45), Inches(12.3), Inches(1.25), fill=NAVY, round_=True)
+text(s, Inches(0.75), Inches(5.58), Inches(11.85), Inches(1.0),
+     [[("HW팀 시사점", 13.5, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("\u2022 공통 결론: '하나만'이 아니라 업무별 스택 사용 — Reddit·X·GitHub 모두 도구 갈아타기를 권장", 11.5, WHITE, False)],
+      [("\u2022 팀 활용은 Slack 요약부터, Discord·MCP 원격 제어는 사내 보안 검토 후 (외부 연동 주의)", 11.5, WHITE, False)]],
+     line_spacing=1.08, space_after=2)
 pnum(s, 10)
 
 # Slide 9c — 정량 데이터 (설문·통계) (신규)
