@@ -431,9 +431,8 @@ table_simple(
         ["측정 로그·표 정리", "3종 공통", "반복 정형화 작업에 모두 활용 가능"],
         ["스캔 PDF·회로도 OCR", "Gemini", "문서·이미지 추론 공식 사례 보유"],
         ["다단계 자동화", "ChatGPT, Claude", "AgentKit / Claude Code 기반"],
-        ["최종 회로·양산 판단", "엔지니어", "AI는 보조 수단, 실측 검증 필수"],
     ],
-    col_w=[Inches(2.8), Inches(2.5), Inches(6.95)], row_h=Inches(0.55), fsize=11, hsize=11.5
+    col_w=[Inches(2.8), Inches(2.5), Inches(6.95)], row_h=Inches(0.64), fsize=11, hsize=11.5
 )
 box(s, Inches(0.55), Inches(5.5), Inches(12.25), Inches(1.25), fill=SKY, line=LINE, line_w=1, round_=True)
 text(s, Inches(0.8), Inches(5.6), Inches(11.8), Inches(1.05),
@@ -445,9 +444,9 @@ pnum(s, 15)
 
 # Slide 13 — 결론: LLM별 사내 활용 방안
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (15/17)", "결론: LLM별 사내 활용 방안")
+header(s, "외부 AI 3종 비교  (15/17)", "결론: LLM별 사내 활용 방안과 도입 효과")
 text(s, Inches(0.55), Inches(1.18), Inches(12.3), Inches(0.42),
-     [[("공식 자료와 사용자 사용 사례를 종합한, HW 개발 업무에서의 효율적 활용 방안입니다.", 12, GRAY, False)]])
+     [[("목표는 정형·반복 업무를 최대한 AI가 직접 수행하도록 확대하여, 엔지니어가 핵심 설계·검증에 집중하는 것입니다.", 12, GRAY, False)]])
 concl = [
     ("ChatGPT", BLUE, ["측정 자동화·CI/CD 로그 분석 스크립트 초안 작성",
                         "회의록·시험 보고서 등 문서 초안 신속 생성",
@@ -470,12 +469,13 @@ for i, (title, color, items) in enumerate(concl):
         text(s, x + Inches(0.22), yy, cw - Inches(0.42), Inches(0.6),
              [[("\u2022 " + item, 11, GRAY, False)]], line_spacing=1.02)
         yy += Inches(0.62)
-box(s, Inches(0.55), Inches(4.72), Inches(12.3), Inches(1.78), fill=NAVY, round_=True)
-text(s, Inches(0.85), Inches(4.72), Inches(11.6), Inches(1.78),
-     [[("종합 결론 및 도입 제언", 15, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("\u2022 외부 LLM은 사내 Gauss를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할 분담", 11.5, WHITE, False)],
-      [("\u2022 업무별 PoC 1~2건 \u2192 효과·보안·사용 한도 측정 \u2192 팀 표준 활용 가이드 수립", 11.5, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.25, space_after=4)
+box(s, Inches(0.55), Inches(4.62), Inches(12.3), Inches(1.95), fill=NAVY, round_=True)
+text(s, Inches(0.85), Inches(4.62), Inches(11.6), Inches(1.95),
+     [[("사내 도입 시 기대 효과 (AI별)", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("\u2022 ChatGPT: 측정 자동화·문서 초안·도구 연동으로 반복 업무 처리 시간 대폭 단축", 11.5, WHITE, False)],
+      [("\u2022 Gemini: 장문 사양서·데이터시트 분석을 자동화해 자료 조사 부담 경감", 11.5, WHITE, False)],
+      [("\u2022 Claude: 펌웨어·드라이버 코드 작성·리팩터링으로 개발 생산성 향상", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.28, space_after=4)
 pnum(s, 16)
 
 # Slide 13b — 중국 LLM 상위 2종 vs ChatGPT (신규, 참고)
