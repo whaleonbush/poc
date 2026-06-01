@@ -128,8 +128,8 @@ for name, desc in targets:
     text(s, Inches(2.2), y, Inches(4.1), Inches(0.66), [[(desc, 10.5, GRAY, False)]], anchor=MSO_ANCHOR.MIDDLE)
     y += Inches(0.78)
 section(s, Inches(6.9), Inches(1.25), Inches(6), "평가 기준 (6개 항목)")
-criteria = ["생산성 (코딩·문서·반복 업무 자동화)", "에이전트 (다단계 작업 자동 수행)",
-            "문서·지식 (장문 사양서·검색·OCR)", "멀티모달 (이미지·PDF 처리)",
+criteria = ["생산성 (코딩·추론)", "에이전트 (다단계 자동화)",
+            "문서·지식 (장문·검색·OCR)", "멀티모달 (이미지·PDF)",
             "엔터프라이즈 (관리·보안·연동)", "비용·속도 (API·사용 한도)"]
 y = Inches(1.7)
 for c in criteria:
@@ -228,21 +228,20 @@ s = add_slide(); set_bg(s, WHITE)
 header(s, "외부 AI 3종 비교  (6/17)", "기능 비교 매트릭스")
 table_simple(
     s, Inches(0.45), Inches(1.5),
-    ["항목", "ChatGPT", "Gemini", "Claude"],
+    ["평가 항목", "ChatGPT", "Gemini", "Claude"],
     [
-        ["코딩·추론", "◎", "◎", "◎"],
-        ["에이전트·MCP", "◎", "◎", "◎"],
-        ["긴 문서·맥락", "○", "◎", "◎"],
-        ["검색·최신정보", "○", "◎", "△"],
-        ["멀티모달·OCR", "○", "◎", "○"],
-        ["Google 연동", "△", "◎", "△"],
-        ["코드 품질(참고)", "○", "○", "◎"],
+        ["생산성 (코딩·추론)", "◎", "○", "◎"],
+        ["에이전트 (다단계 자동화)", "◎", "◎", "◎"],
+        ["문서·지식 (장문·검색·OCR)", "○", "◎", "○"],
+        ["멀티모달 (이미지·PDF)", "○", "◎", "○"],
+        ["엔터프라이즈 (관리·보안·연동)", "◎", "◎", "○"],
+        ["비용·속도 (API·사용 한도)", "○", "◎", "△"],
     ],
-    col_w=[Inches(2.5), Inches(3.2), Inches(3.2), Inches(3.2)],
-    row_h=Inches(0.58), fsize=12, hsize=11.5
+    col_w=[Inches(4.0), Inches(2.8), Inches(2.8), Inches(2.8)],
+    row_h=Inches(0.62), fsize=12, hsize=11.5
 )
-text(s, Inches(0.55), Inches(6.35), Inches(12), Inches(0.5),
-     [[("◎ 강함  ○ 보통  △ 상대적 약함  |  '코드 품질'은 웹 사용기 참고, 공식 벤치 아님", 10.5, LGRAY, False)]],
+text(s, Inches(0.45), Inches(6.05), Inches(12.4), Inches(0.5),
+     [[("◎ 강함   ○ 보통   △ 상대적 약함   |   공식 자료 및 사용자 평가 종합 (정량 벤치마크 아님)", 10.5, LGRAY, False)]],
      align=PP_ALIGN.CENTER)
 pnum(s, 7)
 
@@ -365,11 +364,11 @@ bullet_card(s, Inches(8.85), Inches(1.4), Inches(4.0), Inches(3.6), "Claude",
      "claude.ai·Code·Design 한도 통합 \u2192 한 곳 쓰면 다른 곳↓",
      "상대적으로 느리고 비쌈"], RED)
 box(s, Inches(0.45), Inches(5.25), Inches(12.4), Inches(1.45), fill=NAVY, round_=True)
-text(s, Inches(0.7), Inches(5.4), Inches(11.9), Inches(1.15),
+text(s, Inches(0.75), Inches(5.25), Inches(11.85), Inches(1.45),
      [[("HW 개발 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("사내 Gauss의 분당 3~4회 호출 제한과 마찬가지로, 외부 LLM도 사용 한도가 실무 병목 요인입니다.", 12, WHITE, False)],
-      [("\u2192 PoC 단계에서 사용 한도·응답 속도·코드 신뢰도(오류율)를 정량 측정 권장.", 12, WHITE, False)]],
-     line_spacing=1.1, space_after=2)
+      [("\u2022 사내 Gauss의 분당 3~4회 호출 제한과 마찬가지로, 외부 LLM도 사용 한도가 실무 병목 요인", 12, WHITE, False)],
+      [("\u2022 PoC 단계에서 사용 한도·응답 속도·코드 신뢰도(오류율)를 정량 측정 권장", 12, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.22, space_after=3)
 pnum(s, 12)
 
 # Slide 10 — 유저 평가 업무별 비교
@@ -472,11 +471,11 @@ for i, (title, color, items) in enumerate(concl):
              [[("\u2022 " + item, 11, GRAY, False)]], line_spacing=1.02)
         yy += Inches(0.62)
 box(s, Inches(0.55), Inches(4.72), Inches(12.3), Inches(1.78), fill=NAVY, round_=True)
-text(s, Inches(0.85), Inches(4.88), Inches(11.7), Inches(1.5),
+text(s, Inches(0.85), Inches(4.72), Inches(11.65), Inches(1.78),
      [[("종합 결론 및 도입 제언", 15, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("· 외부 LLM은 사내 Gauss(망분리 보조)를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할을 분담합니다.", 12, WHITE, False)],
-      [("· 권장안: 업무별 PoC 1~2건 선정 \u2192 효과·보안·사용 한도 정량 측정 \u2192 팀 표준 활용 가이드 수립.", 12, WHITE, False)]],
-     line_spacing=1.14, space_after=2)
+      [("\u2022 외부 LLM은 사내 Gauss(망분리 보조)를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할 분담", 12, WHITE, False)],
+      [("\u2022 권장안: 업무별 PoC 1~2건 선정 \u2192 효과·보안·사용 한도 정량 측정 \u2192 팀 표준 활용 가이드 수립", 12, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.22, space_after=3)
 pnum(s, 16)
 
 # Slide 13b — 중국 LLM 상위 2종 vs ChatGPT (신규, 참고)
