@@ -35,18 +35,22 @@
 
 ## 3. 사용자 평가 요약 (웹, 참고)
 
-> 아래는 제3자 비교·리뷰 요약이며, 벤치마크 수치는 출처·측정 방식마다 다를 수 있음.
+> **상세본**: Reddit·X·GitHub 중심 유저 후기는 [외부AI_3종_유저평가_비교조사.md](외부AI_3종_유저평가_비교조사.md) 참조.  
+> 아래는 요약이며, 벤치마크 수치는 출처·측정 방식마다 다를 수 있음.
 
 | 관점 | ChatGPT | Gemini | Claude |
 |------|---------|--------|--------|
-| 코딩 품질 | 만능, DevOps·인프라·프로토타입 강점 언급 다수 | 대규모 코드베이스·보안 분석·맥락 이해 강점 | **코딩 품질·유지보수성**에서 우위 평가 다수 |
-| 긴 문서 | 양호 | **긴 문서·검색 연동** 강점 | 장문맥·엔터프라이즈 문서 작업 강점 |
-| 생태계 | **가장 넓음**, 도입·조달 용이성 | Google Workspace·Cloud 연동 | Claude Code 등 개발자 도구 집중 |
+| 코딩 품질 | 만능·Codex 속도·위임, DevOps·프로토타입 | 대규모 repo·속도, 코딩은 평가 엇갈림 | **코드 가독성·멀티파일** 우위 의견 다수 |
+| 긴 문서 | Custom GPT·범용 | **Workspace·긴 PDF** 강점 | 긴 글·구조화·코드 리뷰 |
+| 에이전트 | Codex 클라우드 PR, AgentKit | Antigravity·Jewels 성장 | **Claude Code** 개발자 선호 |
+| 불만(공통) | 한도·품질 변동 | “검색형”, 코딩 약함 의견 | **사용 한도**, 느릴 때 있음 |
+
+**유저 공통 패턴**: 하나만 쓰기보다 **역할 분담 스택**(예: Claude 코딩 + Gemini 문서 + ChatGPT 만능).
 
 참고 URL:
-- [Kanerika, 2026 workflow 비교](https://medium.com/@kanerika/chatgpt-vs-gemini-vs-claude-choosing-the-right-ai-for-your-workflow-05e2e6a90d8c)
-- [IntuitionLabs Enterprise Guide](https://intuitionlabs.ai/articles/claude-vs-chatgpt-vs-copilot-vs-gemini-enterprise-comparison)
-- [PickYourAITool 코딩 비교](https://pickyouraitool.com/blog/chatgpt-vs-claude-vs-gemini-for-coding/)
+- [Reddit 요약 (Foxafox)](https://foxafox.com/ai-news/chatgpt-vs-claude-vs-gemini-reddit)
+- [GitHub Gist: 에이전트 아키텍처](https://gist.github.com/Haseeb-Qureshi/2213cc0487ea71d62572a645d7582518)
+- [Kanerika 2026 workflow](https://medium.com/@kanerika/chatgpt-vs-gemini-vs-claude-choosing-the-right-ai-for-your-workflow-05e2e6a90d8c)
 
 ---
 
