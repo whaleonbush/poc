@@ -83,9 +83,8 @@ def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE, fsize
         for j, cell in enumerate(row):
             cw = col_w[j]
             box(slide, x, y, cw, row_h, fill=fill, line=LINE, line_w=0.75)
-            al = PP_ALIGN.CENTER if j == 0 else PP_ALIGN.LEFT
             text(slide, x + Pt(3), y, cw - Pt(6), row_h, [[(cell, fsize, GRAY, False)]],
-                 align=al, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.92)
+                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.95)
             x += cw
         y += row_h
     return y
@@ -469,26 +468,33 @@ text(s, Inches(0.9), Inches(5.1), Inches(11.5), Inches(1.25),
      line_spacing=1.1, space_after=2)
 pnum(s, 16)
 
-# Slide 13b — 중국 LLM 상위 2종 (신규, 참고)
+# Slide 13b — 중국 LLM 상위 2종 vs ChatGPT (신규, 참고)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 참고  (16/17)", "중국 LLM 상위 2종 — 강점 및 평가")
-bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(3.05), "DeepSeek V4 Pro (오픈웨이트·MIT)",
-    ["오픈웨이트(MIT)·1M 맥락 \u2192 자체 호스팅 가능",
-     "코딩·수학 최강 오픈모델: LiveCodeBench 93.5%, SWE-Bench Verified 80.6%",
-     "출력 비용 GPT-5.5 대비 약 1/34 ($0.44/$0.87 per M)",
-     "평가: '가성비 1위', 수학·코드 특화 / BenchLM 중국모델 1위(88점)"], BLUE)
-bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(3.05), "Qwen3.7-Max (Alibaba·프로프라이어터리)",
-    ["에이전트 특화 플래그십·1M 맥락·네이티브 확장 사고",
-     "SWE-Bench Pro 60.6%, Terminal-Bench 2.0 69.7%, GPQA 92.4%",
-     "프런티어 중 최저 환각률 22.9% 보고",
-     "평가: 'Agent·멀티스텝 벤치 SOTA' / 장기 코딩 에이전트 우위"], ACCENT)
-box(s, Inches(0.55), Inches(4.65), Inches(12.25), Inches(2.05), fill=PEACH, line=ACCENT, line_w=1.4, round_=True)
-text(s, Inches(0.8), Inches(4.78), Inches(11.85), Inches(1.8),
-     [[("도입 주의 (HW팀 보안 관점)", 14, ACCENT, True)],
-      [("\u2022 데이터 거버넌스: 미국·국내 관할 데이터 레지던시 보장 미흡 \u2192 사내 보안·법무 검토 필수", 12, RED, True)],
-      [("\u2022 HW 설계·소스코드 등 민감 정보 입력 금지 권고 (외부 전송 위험)", 12, GRAY, False)],
-      [("\u2022 수치는 자가보고·제3자 벤치 혼재 \u2192 도입 전 사내 PoC로 재검증 (Gauss 보조 용도)", 12, GRAY, False)]],
-     line_spacing=1.1, space_after=2)
+header(s, "외부 AI 참고  (16/17)", "중국 LLM 상위 2종 vs ChatGPT — 성능·결과물 비교")
+table_simple(
+    s, Inches(0.5), Inches(1.28),
+    ["비교 항목", "ChatGPT (GPT-5.5)", "DeepSeek V4 Pro", "Qwen3.7-Max"],
+    [
+        ["실무 코딩 (SWE-Bench)", "최상위권 (프런티어)", "80.6% (근접)", "Pro 60.6% · Term 69.7%"],
+        ["과학 추론 (GPQA)", "상위권", "90.1%", "92.4% (최고급)"],
+        ["맥락 길이", "수십만 토큰", "100만 토큰", "100만 토큰"],
+        ["출력 비용", "기준 (1x)", "약 1/34 수준", "ChatGPT보다 저렴"],
+        ["라이선스", "클로즈드 API", "오픈웨이트 (MIT)", "클로즈드 API"],
+    ],
+    col_w=[Inches(2.7), Inches(3.2), Inches(3.25), Inches(3.2)],
+    row_h=Inches(0.46), fsize=10.5, hsize=11
+)
+section(s, Inches(0.5), Inches(4.18), Inches(12), "ChatGPT 대비 결과물 차이 (실사용 평가)")
+text(s, Inches(0.62), Inches(4.6), Inches(12.2), Inches(1.25),
+     [[("\u2022 코드: ChatGPT는 설명·주석이 친절한 범용형 / DeepSeek은 간결·고효율 코드와 수학·알고리즘 우위 / Qwen은 장기 에이전트·멀티스텝 일관성", 11, GRAY, False)],
+      [("\u2022 한국어·문장: ChatGPT가 자연스러움·맥락 유지에서 우위 / 중국 모델은 영어·중국어가 강하고 한국어 미세 표현은 상대적 약세 가능", 11, GRAY, False)],
+      [("\u2022 안정성: ChatGPT는 생태계·안전장치가 성숙 / 중국 모델은 환각률 개선(Qwen 22.9%)이나 정책·검열 편향 가능성", 11, GRAY, False)]],
+     line_spacing=1.18, space_after=3)
+box(s, Inches(0.5), Inches(5.95), Inches(12.35), Inches(0.95), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
+text(s, Inches(0.75), Inches(5.95), Inches(11.85), Inches(0.95),
+     [[("도입 주의: 데이터 레지던시(관할) 보장 미흡 \u2192 HW 설계·소스코드 등 민감정보 입력 금지·법무/보안 검토 필수.", 11, RED, True)],
+      [("수치는 자가보고·제3자 벤치가 혼재 \u2192 도입 전 사내 PoC로 재검증 (사내 Gauss 보조 용도로 한정 검토).", 11, GRAY, False)]],
+     align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
 pnum(s, 17)
 
 # Slide 14 — 출처
