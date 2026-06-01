@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HW 개발팀 AI 활용 방안 — 쉬운 용어 요약본 (3페이지)"""
+"""NC HW 개발팀 — 사내 AI 환경 활용 범위·한계·대조 (4페이지)"""
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -13,6 +13,7 @@ GRAY   = RGBColor(0x44, 0x4A, 0x55)
 LGRAY  = RGBColor(0x8A, 0x92, 0x9E)
 WHITE  = RGBColor(0xFF, 0xFF, 0xFF)
 ACCENT = RGBColor(0xF2, 0x7E, 0x2E)
+GREEN  = RGBColor(0x27, 0xAE, 0x60)
 RED    = RGBColor(0xC0, 0x39, 0x2B)
 PEACH  = RGBColor(0xFE, 0xF1, 0xE6)
 LINE   = RGBColor(0xD5, 0xDD, 0xE6)
@@ -70,7 +71,7 @@ def pnum(slide, n):
          [[(str(n), 10, LGRAY, False)]], align=PP_ALIGN.RIGHT)
 
 def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE,
-                 fsize=11, hsize=11.5):
+                 fsize=10.5, hsize=11):
     x = l
     for j, htxt in enumerate(headers):
         cw = col_w[j]
@@ -84,175 +85,187 @@ def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE,
         for j, cell in enumerate(row):
             cw = col_w[j]
             box(slide, x, y, cw, row_h, fill=fill, line=LINE, line_w=0.75)
-            al = PP_ALIGN.CENTER if j == 0 else PP_ALIGN.LEFT
-            text(slide, x + Pt(4), y, cw - Pt(8), row_h, [[(cell, fsize, GRAY, False)]],
-                 align=al, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.95)
+            text(slide, x + Pt(3), y, cw - Pt(6), row_h, [[(cell, fsize, GRAY, False)]],
+                 align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE, line_spacing=0.92)
             x += cw
         y += row_h
     return y
 
+KICKER = "NC HW 개발팀  |  사내 AI 환경 (VS Code · Cline SR · Gauss · Ollama · GitHub Enterprise)"
+
 # ============================================================
-# Slide 1 — 왜 지금 검토하는가
+# Slide 1 — HW 개발 업무 전체 활용 범위
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, "삼성전자 스마트폰 HW 개발팀 AI 활용 방안  (1/4)", "왜 지금 AI 도구를 검토하는가")
+header(s, KICKER + "  (1/4)", "HW 개발 업무 — 사내 AI 환경 활용 범위")
 
-section(s, Inches(0.55), Inches(1.22), Inches(6), "1. 우리 팀 업무와 AI가 도울 수 있는 부분")
-intro = [
-    ("우리 팀 업무", "스마트폰 안의 회로, 센서, 전원, 충전, 통신 부품이 안정적으로 동작하도록 개발·검증합니다."),
-    ("AI가 잘 돕는 일", "회로 자체를 대신 설계하기보다, 코드 초안·문서 정리·로그 분석·측정 데이터 정리처럼 반복되는 일을 도와줍니다."),
-    ("보고 목적", "현재 사내 도구로 지금 당장 할 수 있는 일과, 현재 조건 때문에 어려운 일을 구분해 보고드립니다."),
-]
-y = Inches(1.72)
-for k, v in intro:
-    box(s, Inches(0.55), y, Inches(6.05), Inches(1.18), fill=SKY, line=LINE, line_w=1, round_=True)
-    box(s, Inches(0.55), y, Pt(6), Inches(1.18), fill=BLUE)
-    text(s, Inches(0.82), y + Inches(0.1), Inches(5.55), Inches(0.35), [[(k, 13.5, BLUE, True)]])
-    text(s, Inches(0.82), y + Inches(0.43), Inches(5.55), Inches(0.65), [[(v, 11.7, GRAY, False)]], line_spacing=1.05)
-    y += Inches(1.33)
+text(s, Inches(0.55), Inches(1.15), Inches(12.2), Inches(0.38),
+     [[("목표: 정형·반복 업무를 AI가 직접 수행하도록 확대하고, 엔지니어는 설계·검증·판단에 집중", 11.5, GRAY, False)]])
 
-section(s, Inches(7.0), Inches(1.22), Inches(6), "2. 현재 사용 가능한 도구")
-tools = [
-    ("Cline SR", "VS Code 안에서 일하는 AI 도우미", "개발자가 시키면 코드를 읽고, 고치고, 설명하고, 간단한 명령도 실행합니다."),
-    ("Gauss", "회사 안에서 쓰는 AI 두뇌", "외부 유출 부담은 낮지만, 호출 횟수 제한이 있어 속도에 한계가 있습니다."),
-    ("API 호출 제한", "AI에게 질문할 수 있는 횟수 제한", "현재 분당 약 3~4회 수준이라 긴 작업은 중간에 기다리는 시간이 생깁니다."),
-]
-y = Inches(1.72)
-for name, easy, desc in tools:
-    box(s, Inches(7.0), y, Inches(5.75), Inches(1.13), fill=WHITE, line=LINE, line_w=1, round_=True)
-    box(s, Inches(7.0), y, Pt(6), Inches(1.13), fill=ACCENT if name == "API 호출 제한" else BLUE)
-    text(s, Inches(7.25), y + Inches(0.08), Inches(5.25), Inches(0.34), [[(name + " : " + easy, 13, NAVY, True)]])
-    text(s, Inches(7.25), y + Inches(0.43), Inches(5.25), Inches(0.62), [[(desc, 11.2, GRAY, False)]], line_spacing=1.0)
-    y += Inches(1.25)
+table_simple(
+    s, Inches(0.45), Inches(1.58),
+    ["업무 영역", "활용 내용", "주요 도구"],
+    [
+        ["펌웨어·드라이버", "C/HAL·I2C/SPI/UART 코드 초안·리팩터링", "VS Code + Cline SR + Gauss"],
+        ["레지스터·설정", "데이터시트 기반 헤더·초기화 코드 생성", "Cline SR + Gauss"],
+        ["측정·검증 자동화", "계측기 제어·로그 수집 Python 스크립트", "Cline SR + Gauss / Ollama"],
+        ["데이터·로그 분석", "측정값 파싱·표·그래프·이상 패턴 정리", "Cline SR + Gauss"],
+        ["문서·보고", "시험·이슈·회의·인수인계 문서 초안", "Gauss / Cline SR"],
+        ["코드 리뷰·품질", "MISRA-C 스타일·예외처리·위험 구간 점검", "Cline SR + Gauss"],
+        ["저장소·협업", "브랜치·PR·이슈·코드 검색·리뷰 워크플로", "GitHub Enterprise"],
+        ["레거시·HDL 보조", "구형 펌웨어 설명·testbench 초안", "Cline SR + Gauss / Ollama"],
+    ],
+    col_w=[Inches(2.35), Inches(6.35), Inches(4.15)],
+    row_h=Inches(0.52), fsize=10.2, hsize=11
+)
 
-box(s, Inches(7.0), Inches(5.65), Inches(5.75), Inches(1.1), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
-text(s, Inches(7.25), Inches(5.75), Inches(5.25), Inches(0.85),
-     [[("핵심 메시지", 13, ACCENT, True)],
-      [("보안 부담 없이 쓸 수 있는 사내 AI 보조 도구이지만, 외부 AI·외부 도구처럼 자유롭고 빠른 환경은 아닙니다.", 11.8, GRAY, False)]],
-     line_spacing=1.05, space_after=2)
+box(s, Inches(0.45), Inches(5.95), Inches(12.4), Inches(1.05), fill=NAVY, round_=True)
+text(s, Inches(0.7), Inches(5.95), Inches(11.9), Inches(1.05),
+     [[("환경 구성 요약", 13, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("VS Code(IDE) + Cline SR(에이전트) + Gauss(사내 LLM) / Ollama(로컬 LLM) + GitHub Enterprise(사내 저장소)", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.12, space_after=2)
 pnum(s, 1)
 
 # ============================================================
 # Slide 2 — 지금 당장 활용 가능한 분야
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, "삼성전자 스마트폰 HW 개발팀 AI 활용 방안  (2/4)", "지금 당장 활용 가능한 분야")
-section(s, Inches(0.55), Inches(1.18), Inches(8), "3. 스마트폰 HW 개발 업무 예시")
+header(s, KICKER + "  (2/4)", "지금 당장 활용 가능한 분야")
+
+section(s, Inches(0.55), Inches(1.18), Inches(12), "즉시 적용 가능 (보안 검토 완료 환경 기준)")
 table_simple(
     s, Inches(0.55), Inches(1.58),
-    ["분야", "활용 방법", "스마트폰 HW 개발 예시"],
+    ["분야", "활용 방법", "HW 개발 예시"],
     [
-        ["부품 제어", "코드 초안 작성", "센서·전원 IC·충전 IC 설정 코드를 먼저 만들어 보고, 개발자가 검토"],
-        ["부품 설명서", "데이터시트 정리", "복잡한 설정값 표를 사람이 보기 쉬운 요약표로 정리"],
-        ["측정", "자동화 코드 작성", "전압·전류·온도·소비전력 측정 스크립트 초안 작성"],
-        ["데이터", "로그·측정값 정리", "측정 결과를 표, 그래프, 원인 후보 문장으로 정리"],
-        ["품질", "코드 점검", "빠진 예외처리, 반복 코드, 위험해 보이는 부분 확인"],
-        ["문서", "보고서 초안 작성", "시험 결과, 이슈 분석, 회의 정리, 개발 가이드 초안 작성"],
+        ["코드 초안", "Cline SR이 파일 단위로 작성·수정", "센서·PMIC·충전 IC 드라이버·HAL 초안"],
+        ["레지스터 맵", "표 기반 헤더·초기화 코드 생성", "데이터시트 레지스터 정의 → .h 변환"],
+        ["측정 스크립트", "Python·SCPI 자동화 코드", "전압·전류·온도·소비전력 측정 루프"],
+        ["로그·데이터 정리", "파싱·표·요약 문장 생성", "시험 로그·CSV → 보고용 표·그래프"],
+        ["문서 초안", "코드·이슈 기반 문서화", "시험 결과·회의록·개발 가이드 초안"],
+        ["코드 점검", "규칙·패턴·누락 검토", "예외처리·매직넘버·중복 코드 지적"],
+        ["Git 워크플로", "PR·이슈·코드 검색", "브랜치 관리·리뷰·이력 추적 (GitHub Enterprise)"],
     ],
-    col_w=[Inches(1.45), Inches(2.75), Inches(7.55)], row_h=Inches(0.62), fsize=11.4, hsize=12
+    col_w=[Inches(1.55), Inches(3.15), Inches(7.55)],
+    row_h=Inches(0.58), fsize=11, hsize=11.5
 )
 
-yb = Inches(5.72)
-box(s, Inches(0.55), yb, Inches(3.95), Inches(1.28), fill=SKY, line=LINE, line_w=1, round_=True)
-text(s, Inches(0.78), yb + Inches(0.12), Inches(3.55), Inches(1.05),
-     [[("잘 맞는 일", 13, BLUE, True)],
-      [("반복되는 코드·문서·정리 작업", 11.6, GRAY, False)],
-      [("예: 측정 로그 정리, 코드 초안", 11.2, GRAY, False)]],
-     line_spacing=1.08, space_after=2)
-box(s, Inches(4.7), yb, Inches(3.95), Inches(1.28), fill=PEACH, line=ACCENT, line_w=1, round_=True)
-text(s, Inches(4.93), yb + Inches(0.12), Inches(3.55), Inches(1.05),
-     [[("주의할 일", 13, ACCENT, True)],
-      [("회로 판단·불량 원인 확정", 11.6, GRAY, False)],
-      [("예: 부품 최종 선정, 양산 영향 판단", 11.2, GRAY, False)]],
-     line_spacing=1.08, space_after=2)
-box(s, Inches(8.85), yb, Inches(3.95), Inches(1.28), fill=NAVY, round_=True)
-text(s, Inches(9.08), yb + Inches(0.12), Inches(3.55), Inches(1.05),
-     [[("한 줄 결론", 13, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("AI가 HW를 대신 설계하는 것이 아니라,", 11.4, WHITE, False)],
-      [("개발자의 반복 업무를 줄이는 도구", 11.4, WHITE, False)]],
-     line_spacing=1.08, space_after=2)
+yb = Inches(5.35)
+box(s, Inches(0.55), yb, Inches(6.0), Inches(1.35), fill=SKY, line=LINE, line_w=1, round_=True)
+text(s, Inches(0.78), yb, Inches(5.55), Inches(1.35),
+     [[("권장 운영", 13, BLUE, True)],
+      [("\u2022 Gauss: 일반 코딩·문서 (고성능)", 11.5, GRAY, False)],
+      [("\u2022 Ollama: 망분리·고민감 자료 (로컬)", 11.5, GRAY, False)],
+      [("\u2022 긴 작업은 짧은 단위로 분할 요청", 11.5, GRAY, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
+box(s, Inches(6.75), yb, Inches(6.05), Inches(1.35), fill=NAVY, round_=True)
+text(s, Inches(6.98), yb, Inches(5.6), Inches(1.35),
+     [[("기대 효과", 13, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("반복·정형 업무 시간 단축", 11.5, WHITE, False)],
+      [("개발자는 설계·실측·검증에 집중", 11.5, WHITE, False)],
+      [("사내 망 내 데이터 유출 없음", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
 pnum(s, 2)
 
 # ============================================================
-# Slide 3 — 현재 조건에서의 한계
+# Slide 3 — 현재 사내 조건의 한계
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, "삼성전자 스마트폰 HW 개발팀 AI 활용 방안  (3/4)", "현재 조건에서의 한계")
-section(s, Inches(0.55), Inches(1.18), Inches(8), "4. 지금 조건에서 어려운 점")
-L = Inches(0.55); W = Inches(12.25)
+header(s, KICKER + "  (3/4)", "현재 사내 조건의 한계")
 
+L = Inches(0.5); W = Inches(12.35)
 limits = [
-    ("외부 MCP·API 도구 사용 제한", "외부 문서 검색, 외부 코드 저장소, 외부 분석 도구와 자동 연결이 어렵습니다. 예: AI가 스스로 최신 부품 예제나 외부 자료실을 찾아오지 못함."),
-    ("임베딩·청킹 특화 모델 제한", "긴 데이터시트·회로 설명서를 잘게 나누고 의미별로 찾는 고급 문서 검색 품질이 제한됩니다. 예: 500페이지 사양서에서 필요한 설정값을 정확히 찾는 능력이 부족할 수 있음."),
-    ("OCR 특화 도구 제한", "이미지, 스캔 PDF, 회로도 캡처 속 글자를 읽는 성능이 제한됩니다. 예: 캡처된 회로도나 스캔 데이터시트를 바로 읽어 정리하기 어려움."),
-    ("Gauss API 호출 제한", "분당 약 3~4회만 AI를 부를 수 있어 Cline SR이 여러 번 생각하고 수정하는 긴 작업에서 속도가 느려집니다."),
-    ("최신 정보 접근 제한", "외부 인터넷 검색이나 최신 예제 확인이 어렵습니다. 예: 새 부품의 공개 자료나 최신 오픈소스 예제를 바로 참고하기 어려움."),
-    ("AI 결과 검증 필요", "그럴듯하지만 틀린 답을 줄 수 있습니다. 예: 전원 시퀀스나 타이밍 조건은 반드시 개발자가 데이터시트와 실측으로 확인해야 함."),
+    ("외부 MCP·API 사용 제한",
+     "외부 문서 검색·외부 저장소·외부 분석 도구 자동 연동 불가. Cline SR이 스스로 최신 공개 자료·외부 API를 호출할 수 없음."),
+    ("임베딩·청킹 성능 제한",
+     "장문 데이터시트·설계서의 의미 기반 검색·분할 처리 품질이 낮음. 수백 페이지 사양서에서 특정 설정값을 정확히 찾기 어려움."),
+    ("OCR 성능 제한",
+     "스캔 PDF·회로도 캡처·이미지 내 텍스트 인식 품질이 낮음. 도면·스캔 자료를 바로 구조화·분석하기 어려움."),
+    ("Gauss API 호출 제한",
+     "분당 약 3~4회 호출 제한. Cline SR의 다단계·다회 수정 작업 시 대기 시간이 누적되어 작업 속도 저하."),
+    ("Ollama 로컬 성능 제한",
+     "개인 PC에 GPU가 없으면 응답·추론 속도가 현저히 느림. 대용량 코드·장문 분석은 실무 적용이 어려움."),
 ]
 
-y = Inches(1.58)
+y = Inches(1.52)
 for idx, (title, desc) in enumerate(limits):
-    bh = Inches(0.82)
-    fill = PEACH if idx in (0, 1, 2, 3) else SKY
-    line = ACCENT if idx in (0, 1, 2, 3) else LINE
-    box(s, L, y, W, bh, fill=fill, line=line, line_w=1.1, round_=True)
-    box(s, L, y, Pt(6), bh, fill=ACCENT if idx in (0, 1, 2, 3) else BLUE)
-    text(s, L + Inches(0.25), y + Inches(0.07), Inches(3.0), Inches(0.35), [[(title, 12.2, NAVY, True)]])
-    text(s, L + Inches(3.35), y + Inches(0.08), Inches(9.0), Inches(0.6), [[(desc, 10.6, GRAY, False)]], line_spacing=1.0)
-    y += bh + Inches(0.09)
+    bh = Inches(0.88)
+    box(s, L, y, W, bh, fill=PEACH, line=ACCENT, line_w=1.0, round_=True)
+    box(s, L, y, Pt(6), bh, fill=ACCENT)
+    text(s, L + Inches(0.22), y + Inches(0.1), Inches(3.15), Inches(0.32), [[(title, 12, NAVY, True)]])
+    text(s, L + Inches(3.45), y + Inches(0.1), Inches(8.75), Inches(0.68),
+         [[(desc, 10.8, GRAY, False)]], line_spacing=1.05)
+    y += bh + Inches(0.1)
 
-box(s, L, Inches(6.83), W, Inches(0.42), fill=NAVY, round_=True)
-text(s, L, Inches(6.83), W, Inches(0.42),
-     [[("핵심: 현재 조건에서는 '보안이 필요한 사내 보조 도구'로는 유용하지만, 외부 도구까지 연결된 완전 자동 개발 도우미는 아닙니다.", 11.7, WHITE, True)]],
+box(s, L, Inches(6.72), W, Inches(0.48), fill=NAVY, round_=True)
+text(s, L, Inches(6.72), W, Inches(0.48),
+     [[("핵심: 보안·망분리 환경에서는 유용하나, 외부 연동·고급 문서/OCR·고속 대량 호출은 현재 구조상 제약", 11.2, WHITE, True)]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
 pnum(s, 3)
 
 # ============================================================
-# Slide 4 — 결론 및 제언
+# Slide 4 — 사내 vs 외부 도구 대조 및 결론
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, "삼성전자 스마트폰 HW 개발팀 AI 활용 방안  (4/4)", "결론 및 제언")
+header(s, KICKER + "  (4/4)", "사내 AI 환경 vs 외부 도구 — 대조 및 결론")
 
-cols = [
-    ("당장 적용 가능", BLUE, [
-        "코드 초안 작성",
-        "문서 초안 작성",
-        "측정 데이터 정리",
-        "로그 분석",
-        "반복 업무 자동화",
-    ]),
-    ("신중 적용", ACCENT, [
-        "회로 동작 최종 판단",
-        "부품 최종 선정",
-        "실제 불량 원인 확정",
-        "양산 영향 판단",
-        "안전·품질 영향 큰 결정",
-    ]),
-    ("개선 필요", RED, [
-        "외부 도구 연결 제한",
-        "문서 검색 성능",
-        "OCR 성능",
-        "Gauss 호출 속도",
-        "팀 공통 사용 가이드",
-    ]),
+# 좌: 사내 / 우: 외부
+half_w = Inches(6.05)
+gap = Inches(0.2)
+lx = Inches(0.5); rx = lx + half_w + gap; ty = Inches(1.35); th = Inches(4.85)
+
+box(s, lx, ty, half_w, th, fill=SKY, line=BLUE, line_w=2, round_=True)
+box(s, lx, ty, half_w, Inches(0.5), fill=BLUE, round_=True)
+text(s, lx, ty, half_w, Inches(0.5), [[("현재 사내 환경 (가능)", 14, WHITE, True)]],
+     align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+internal_items = [
+    "펌웨어·드라이버·HAL 코드 초안·수정",
+    "측정·검증 Python 스크립트 자동화",
+    "로그·측정 데이터 파싱·표·요약",
+    "시험·이슈·회의 문서 초안",
+    "사내 코드·GitHub Enterprise 기반 리뷰",
+    "망분리·로컬(Ollama) 고민감 자료 처리",
+    "Gauss·Cline SR 기반 다단계 코드 작업 (호출 한도 내)",
 ]
-left = Inches(0.65); top = Inches(1.45); cw = Inches(3.95); gap = Inches(0.25); ch = Inches(3.6)
-for i, (title, color, items) in enumerate(cols):
-    x = left + i * (cw + gap)
-    box(s, x, top, cw, ch, fill=WHITE, line=color, line_w=1.8, round_=True)
-    box(s, x, top, cw, Inches(0.62), fill=color, round_=True)
-    text(s, x, top, cw, Inches(0.62), [[(title, 15, WHITE, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-    yy = top + Inches(0.9)
-    for item in items:
-        text(s, x + Inches(0.28), yy, cw - Inches(0.5), Inches(0.32), [[("- " + item, 11.7, GRAY, False)]])
-        yy += Inches(0.48)
+yy = ty + Inches(0.62)
+for item in internal_items:
+    text(s, lx + Inches(0.25), yy, half_w - Inches(0.45), Inches(0.38),
+         [[("\u2713 " + item, 11.2, GRAY, False)]], line_spacing=1.0)
+    yy += Inches(0.52)
 
-box(s, Inches(0.65), Inches(5.35), Inches(12.05), Inches(1.35), fill=SKY, line=LINE, line_w=1.2, round_=True)
-text(s, Inches(0.92), Inches(5.48), Inches(11.5), Inches(1.05),
-     [[("최종 결론", 15, NAVY, True)],
-      [("Cline SR과 Gauss는 스마트폰 HW 개발자의 반복 업무를 줄이는 데 바로 쓸 수 있습니다. 다만 외부 도구 연결, 문서 검색/OCR, API 호출 제한 때문에 '완전 자동 개발'은 어렵습니다. 따라서 낮은 위험의 정리·초안·검토 업무부터 적용하고, 사내 전용 문서 검색·OCR·호출 제한 개선을 다음 과제로 검토하는 것이 현실적입니다.", 12.3, GRAY, False)]],
-     line_spacing=1.1, space_after=2)
+box(s, rx, ty, half_w, th, fill=PEACH, line=RED, line_w=2, round_=True)
+box(s, rx, ty, half_w, Inches(0.5), fill=RED, round_=True)
+text(s, rx, ty, half_w, Inches(0.5), [[("외부 도구 (인증·정책 제약)", 14, WHITE, True)]],
+     align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+external_items = [
+    "외부 MCP·API·플러그인 자동 연동",
+    "ChatGPT·Gemini·Claude 등 외부 LLM 직접 연동",
+    "웹·최신 공개 자료 실시간 검색·인용",
+    "고품질 임베딩·장문 사양서 의미 검색",
+    "고정밀 OCR (스캔 PDF·회로도)",
+    "대량·고속 API 호출 (분당 수십~수백 회)",
+    "멀티모달·에이전트 클라우드 위임 (Codex 등)",
+]
+yy = ty + Inches(0.62)
+for item in external_items:
+    text(s, rx + Inches(0.25), yy, half_w - Inches(0.45), Inches(0.38),
+         [[("\u2717 " + item, 11.2, GRAY, False)]], line_spacing=1.0)
+    yy += Inches(0.52)
+
+# 중앙 VS
+text(s, Inches(6.35), Inches(3.2), Inches(0.65), Inches(0.5),
+     [[("VS", 16, ACCENT, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+
+box(s, Inches(0.5), Inches(6.38), Inches(12.35), Inches(0.88), fill=NAVY, round_=True)
+text(s, Inches(0.75), Inches(6.38), Inches(11.85), Inches(0.88),
+     [[("결론", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("현재 사내 AI 환경에서 활용 가능한 부분은 ", 11.5, WHITE, False),
+       ("코드·스크립트 초안, 측정·로그 정리, 문서 초안, 사내 Git 기반 협업, 망분리 로컬 처리", 11.5, WHITE, True),
+       (" 이다.", 11.5, WHITE, False)],
+      [("다만 사내 조건의 한계로 불가능하거나 어려운 부분은 ", 11.5, WHITE, False),
+       ("외부 MCP·API 연동, 고품질 장문 검색·OCR, 대량 고속 호출, 외부 LLM·최신 웹 자료 자동 활용", 11.5, WHITE, True),
+       (" 이다.", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.15, space_after=2)
 pnum(s, 4)
 
 prs.save("HW개발팀_AI활용방안_요약.pptx")
-print("saved summary:", len(prs.slides._sldIdLst))
+print("saved summary:", len(prs.slides._sldIdLst), "slides")
