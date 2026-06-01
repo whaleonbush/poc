@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""NC HW 개발팀 — 사내 AI 환경 활용 범위·한계·대조 (4페이지)"""
+"""NC HW 개발팀 — Cline SR 사내 활용 (표지·도구 설명 + 활용 범위·한계·대조)"""
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
@@ -91,13 +91,74 @@ def table_simple(slide, l, t, headers, rows, col_w, row_h, head_fill=BLUE,
         y += row_h
     return y
 
-KICKER = "NC HW 개발팀  |  사내 AI 환경 (VS Code · Cline SR · Gauss · Ollama · GitHub Enterprise)"
+KICKER = "NC HW 개발팀  |  Cline SR 사내 활용"
+TOTAL = 6
+
+def tool_card(slide, l, t, w, h, name, desc, scope_lines, color=BLUE):
+    box(slide, l, t, w, h, fill=WHITE, line=color, line_w=1.5, round_=True)
+    box(slide, l, t, w, Inches(0.42), fill=color, round_=True)
+    text(slide, l, t, w, Inches(0.42), [[(name, 13, WHITE, True)]],
+         align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    text(slide, l + Inches(0.15), t + Inches(0.5), w - Inches(0.3), Inches(0.55),
+         [[(desc, 10.2, GRAY, False)]], line_spacing=1.05)
+    text(slide, l + Inches(0.15), t + Inches(1.05), w - Inches(0.3), Inches(0.22),
+         [[("활용 범위", 10.5, color, True)]])
+    yy = t + Inches(1.28)
+    for line in scope_lines:
+        text(slide, l + Inches(0.18), yy, w - Inches(0.32), Inches(0.28),
+             [[("\u2022 " + line, 9.8, GRAY, False)]], line_spacing=1.0)
+        yy += Inches(0.3)
 
 # ============================================================
-# Slide 1 — HW 개발 업무 전체 활용 범위
+# Slide 0 — 표지
+# ============================================================
+s = add_slide(); set_bg(s, NAVY)
+box(s, 0, Inches(3.9), SW, Pt(4), fill=ACCENT)
+text(s, Inches(0.9), Inches(2.0), Inches(11.5), Inches(1.4),
+     [[("Cline SR 사내 활용", 40, WHITE, True)]],
+     line_spacing=1.1)
+text(s, Inches(0.92), Inches(4.35), Inches(11.5), Inches(0.9),
+     [[("NC HW 개발팀  |  Gauss · Ollama · GitHub Enterprise 연계", 16, RGBColor(0xC9,0xD8,0xEA), False)],
+      [("VS Code 기반 사내 AI 코딩 환경 활용 방안", 14, LGRAY, False)]],
+     line_spacing=1.15)
+pnum(s, 1)
+
+# ============================================================
+# Slide 1 — 도구 설명 및 활용 범위
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, KICKER + "  (1/4)", "HW 개발 업무 — 사내 AI 환경 활용 범위")
+header(s, KICKER + "  (2/6)", "사내 도구 구성 — 설명 및 활용 범위")
+
+cw = Inches(6.05); ch = Inches(2.72); gap_x = Inches(0.2); gap_y = Inches(0.18)
+x0 = Inches(0.5); y0 = Inches(1.35)
+
+tool_card(s, x0, y0, cw, ch, "Cline SR",
+    "VS Code 확장 AI 코딩 에이전트. 지시 → 계획 → 실행으로 코드 읽기·작성·수정, 터미널 명령 수행.",
+    ["펌웨어·드라이버·HAL 코드 초안·리팩터링", "멀티파일 일괄 수정·디버깅 보조",
+     "측정·검증 Python 스크립트 생성", "레거시 코드 분석·설명"], BLUE)
+
+tool_card(s, x0 + cw + gap_x, y0, cw, ch, "Gauss",
+    "사내 대형 언어모델(LLM) API. Cline SR의 두뇌 역할. 사내망 내 처리로 외부 유출 없음.",
+    ["일반 코딩·문서·코드 리뷰 질의", "시험·이슈·회의 보고서 초안",
+     "데이터시트 기반 코드·설명 생성", "분당 3~4회 호출 제한 → 장시간 작업 시 대기"], ACCENT)
+
+tool_card(s, x0, y0 + ch + gap_y, cw, ch, "Ollama",
+    "개발자 PC에서 구동하는 로컬 LLM. 완전 오프라인·망분리 환경에서 Cline SR과 연동.",
+    ["고민감·망분리 구역 자료 처리", "간단한 코드·문서 보조 (로컬)",
+     "GPU 없는 PC는 응답 속도 현저히 저하", "대용량·장문 분석은 Gauss 권장"], GREEN)
+
+tool_card(s, x0 + cw + gap_x, y0 + ch + gap_y, cw, ch, "GitHub Enterprise",
+    "사내 Git 저장소·협업 플랫폼. 코드 이력·브랜치·PR·이슈·코드 검색·리뷰 워크플로.",
+    ["소스코드 버전 관리·브랜치 전략", "PR·코드 리뷰·이슈 트래킹",
+     "팀 내 코드 검색·변경 이력 추적", "Cline SR 작업 결과물의 사내 저장·공유"], NAVY)
+
+pnum(s, 2)
+
+# ============================================================
+# Slide 2 — HW 개발 업무 전체 활용 범위
+# ============================================================
+s = add_slide(); set_bg(s, WHITE)
+header(s, KICKER + "  (3/6)", "HW 개발 업무 — 사내 AI 환경 활용 범위")
 
 text(s, Inches(0.55), Inches(1.15), Inches(12.2), Inches(0.38),
      [[("목표: 정형·반복 업무를 AI가 직접 수행하도록 확대하고, 엔지니어는 설계·검증·판단에 집중", 11.5, GRAY, False)]])
@@ -124,13 +185,13 @@ text(s, Inches(0.7), Inches(5.95), Inches(11.9), Inches(1.05),
      [[("환경 구성 요약", 13, RGBColor(0x9F,0xC4,0xE8), True)],
       [("VS Code(IDE) + Cline SR(에이전트) + Gauss(사내 LLM) / Ollama(로컬 LLM) + GitHub Enterprise(사내 저장소)", 11.5, WHITE, False)]],
      anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.12, space_after=2)
-pnum(s, 1)
+pnum(s, 3)
 
 # ============================================================
-# Slide 2 — 지금 당장 활용 가능한 분야
+# Slide 3 — 지금 당장 활용 가능한 분야
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, KICKER + "  (2/4)", "지금 당장 활용 가능한 분야")
+header(s, KICKER + "  (4/6)", "지금 당장 활용 가능한 분야")
 
 section(s, Inches(0.55), Inches(1.18), Inches(12), "즉시 적용 가능 (보안 검토 완료 환경 기준)")
 table_simple(
@@ -164,13 +225,13 @@ text(s, Inches(6.98), yb, Inches(5.6), Inches(1.35),
       [("개발자는 설계·실측·검증에 집중", 11.5, WHITE, False)],
       [("사내 망 내 데이터 유출 없음", 11.5, WHITE, False)]],
      anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.1, space_after=2)
-pnum(s, 2)
+pnum(s, 4)
 
 # ============================================================
-# Slide 3 — 현재 사내 조건의 한계
+# Slide 4 — 현재 사내 조건의 한계
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, KICKER + "  (3/4)", "현재 사내 조건의 한계")
+header(s, KICKER + "  (5/6)", "현재 사내 조건의 한계")
 
 L = Inches(0.5); W = Inches(12.35)
 limits = [
@@ -200,13 +261,13 @@ box(s, L, Inches(6.72), W, Inches(0.48), fill=NAVY, round_=True)
 text(s, L, Inches(6.72), W, Inches(0.48),
      [[("핵심: 보안·망분리 환경에서는 유용하나, 외부 연동·고급 문서/OCR·고속 대량 호출은 현재 구조상 제약", 11.2, WHITE, True)]],
      align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
-pnum(s, 3)
+pnum(s, 5)
 
 # ============================================================
-# Slide 4 — 사내 vs 외부 도구 대조 및 결론
+# Slide 5 — 사내 vs 외부 도구 대조 및 결론
 # ============================================================
 s = add_slide(); set_bg(s, WHITE)
-header(s, KICKER + "  (4/4)", "사내 AI 환경 vs 외부 도구 — 대조 및 결론")
+header(s, KICKER + "  (6/6)", "사내 AI 환경 vs 외부 도구 — 대조 및 결론")
 
 # 좌: 사내 / 우: 외부
 half_w = Inches(6.05)
@@ -265,7 +326,7 @@ text(s, Inches(0.75), Inches(6.38), Inches(11.85), Inches(0.88),
        ("외부 MCP·API 연동, 고품질 장문 검색·OCR, 대량 고속 호출, 외부 LLM·최신 웹 자료 자동 활용", 11.5, WHITE, True),
        (" 이다.", 11.5, WHITE, False)]],
      anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.15, space_after=2)
-pnum(s, 4)
+pnum(s, 6)
 
 prs.save("HW개발팀_AI활용방안_요약.pptx")
 print("saved summary:", len(prs.slides._sldIdLst), "slides")
