@@ -115,7 +115,7 @@ pnum(s, 1)
 
 # Slide 2 — 보고 목적
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (1/16)", "보고 목적 및 평가 기준")
+header(s, "외부 AI 3종 비교  (1/17)", "보고 목적 및 평가 기준")
 section(s, Inches(0.55), Inches(1.2), Inches(6), "왜 지금 비교하나")
 text(s, Inches(0.7), Inches(1.65), Inches(12), Inches(1.0),
      [[("2026년 6월부터 외부 AI 도입을 검토합니다. 도입 전 ChatGPT·Gemini·Claude 각각의", 13, GRAY, False)],
@@ -145,7 +145,7 @@ pnum(s, 2)
 
 # Slide 3 — 3종 한눈에
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (2/16)", "3종 한눈에 보기")
+header(s, "외부 AI 3종 비교  (2/17)", "3종 한눈에 보기")
 table_simple(
     s, Inches(0.55), Inches(1.55),
     ["AI", "한 줄 포지션", "강점 (공식·참고)", "주의"],
@@ -166,7 +166,7 @@ pnum(s, 3)
 
 # Slide 4 — ChatGPT
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (3/16)", "ChatGPT (OpenAI)")
+header(s, "외부 AI 3종 비교  (3/17)", "ChatGPT (OpenAI)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["GPT-5.5: 복잡 추론·코딩용 플래그십 (맥락 약 100만 토큰)",
      "Responses API: 추론·도구·웹/파일 검색·Computer Use",
@@ -185,7 +185,7 @@ pnum(s, 4)
 
 # Slide 5 — Gemini
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (4/16)", "Gemini (Google)")
+header(s, "외부 AI 3종 비교  (4/17)", "Gemini (Google)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["Gemini 3.5 Flash: 에이전트·코딩·멀티모달 (2026.5 GA)",
      "Google Search·File Search·URL Context 그라운딩",
@@ -204,7 +204,7 @@ pnum(s, 5)
 
 # Slide 6 — Claude
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (5/16)", "Claude (Anthropic)")
+header(s, "외부 AI 3종 비교  (5/17)", "Claude (Anthropic)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["Opus 4.6/4.7, Sonnet 4.6: 복잡 추론·장기 에이전트 코딩",
      "맥락 최대 100만 토큰 (Opus/Sonnet 4.6)",
@@ -223,7 +223,7 @@ pnum(s, 6)
 
 # Slide 7 — 기능 비교 매트릭스
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (6/16)", "기능 비교 매트릭스")
+header(s, "외부 AI 3종 비교  (6/17)", "기능 비교 매트릭스")
 table_simple(
     s, Inches(0.45), Inches(1.5),
     ["항목", "ChatGPT", "Gemini", "Claude"],
@@ -246,7 +246,7 @@ pnum(s, 7)
 
 # Slide 8 — 유저 평가 조사 방법
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (7/16)", "Reddit · X · GitHub · Slack · Discord — 조사 방법")
+header(s, "유저 평가 기반 비교  (7/17)", "Reddit · X · GitHub · Slack · Discord — 조사 방법")
 section(s, Inches(0.55), Inches(1.2), Inches(6), "수집 범위 (5개 채널)")
 text(s, Inches(0.7), Inches(1.6), Inches(5.8), Inches(2.4),
      [[("Reddit: 비교·불만 스레드, 고득표(수천 upvotes) 글", 12, GRAY, False)],
@@ -274,7 +274,7 @@ pnum(s, 8)
 
 # Slide 9 — 플랫폼별 유저 목소리
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (8/16)", "플랫폼별에서 들리는 목소리")
+header(s, "유저 평가 기반 비교  (8/17)", "플랫폼별에서 들리는 목소리")
 table_simple(
     s, Inches(0.55), Inches(1.4),
     ["플랫폼", "ChatGPT", "Gemini", "Claude"],
@@ -299,7 +299,7 @@ pnum(s, 9)
 
 # Slide 9b — 커뮤니티 사용기 5종 (Reddit·X·GitHub·Slack·Discord)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (9/16)", "커뮤니티 사용기 (Reddit·X·GitHub·Slack·Discord)")
+header(s, "유저 평가 기반 비교  (9/17)", "커뮤니티 사용기 (Reddit·X·GitHub·Slack·Discord)")
 table_simple(
     s, Inches(0.5), Inches(1.35),
     ["커뮤니티", "대표 사용기 · 인용 패턴 (참고)"],
@@ -322,7 +322,7 @@ pnum(s, 10)
 
 # Slide 9c — 정량 데이터 (설문·통계) (신규)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (10/16)", "정량 데이터 (제3자 설문·통계, 참고)")
+header(s, "유저 평가 기반 비교  (10/17)", "정량 데이터 (제3자 설문·통계, 참고)")
 table_simple(
     s, Inches(0.5), Inches(1.45),
     ["지표", "수치", "출처"],
@@ -346,7 +346,7 @@ pnum(s, 11)
 
 # Slide 9d — AI별 실사용 불만 상세 (신규)
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (11/16)", "AI별 실사용 불만 (상세)")
+header(s, "유저 평가 기반 비교  (11/17)", "AI별 실사용 불만 (상세)")
 bullet_card(s, Inches(0.45), Inches(1.4), Inches(4.05), Inches(3.6), "ChatGPT",
     ["GPT-5 전환 후 '답 짧음·개성↓·다단계 추론↓' 대규모 불만",
      "Plus 사용 한도(주당 thinking 메시지) 체감",
@@ -372,7 +372,7 @@ pnum(s, 12)
 
 # Slide 10 — 유저 평가 업무별 비교
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (12/16)", "업무별 유저 평가 (HW 관점)")
+header(s, "유저 평가 기반 비교  (12/17)", "업무별 유저 평가 (HW 관점)")
 table_simple(
     s, Inches(0.55), Inches(1.48),
     ["업무", "ChatGPT", "Gemini", "Claude"],
@@ -399,7 +399,7 @@ pnum(s, 13)
 
 # Slide 11 — 공식 vs 유저
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (13/16)", "공식 소개 vs 유저 평가 — 차이")
+header(s, "유저 평가 기반 비교  (13/17)", "공식 소개 vs 유저 평가 — 차이")
 table_simple(
     s, Inches(0.55), Inches(1.5),
     ["AI", "공식이 말하는 것", "유저가 추가로 말하는 것"],
@@ -421,7 +421,7 @@ pnum(s, 14)
 
 # Slide 12 — HW팀 시사점 + 선택 가이드
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (14/16)", "HW 개발팀 적용 및 선택 가이드")
+header(s, "외부 AI 3종 비교  (14/17)", "HW 개발팀 적용 및 선택 가이드")
 table_simple(
     s, Inches(0.55), Inches(1.5),
     ["업무", "우선 검토", "이유 (쉬운 말)"],
@@ -445,7 +445,7 @@ pnum(s, 15)
 
 # Slide 13 — 결론
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (15/16)", "결론 및 제언")
+header(s, "외부 AI 3종 비교  (15/17)", "결론 및 제언")
 cols = [
     ("당장 PoC 가능", GREEN, ["코드·문서 초안", "측정 데이터 정리", "로그 분석", "반복 업무 자동화"]),
     ("신중 적용", ACCENT, ["회로·부품 최종 판단", "불량 원인 확정", "양산 영향 평가"]),
@@ -469,16 +469,38 @@ text(s, Inches(0.9), Inches(5.1), Inches(11.5), Inches(1.25),
      line_spacing=1.1, space_after=2)
 pnum(s, 16)
 
+# Slide 13b — 중국 LLM 상위 2종 (신규, 참고)
+s = add_slide(); set_bg(s, WHITE)
+header(s, "외부 AI 참고  (16/17)", "중국 LLM 상위 2종 — 강점 및 평가")
+bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(3.05), "DeepSeek V4 Pro (오픈웨이트·MIT)",
+    ["오픈웨이트(MIT)·1M 맥락 \u2192 자체 호스팅 가능",
+     "코딩·수학 최강 오픈모델: LiveCodeBench 93.5%, SWE-Bench Verified 80.6%",
+     "출력 비용 GPT-5.5 대비 약 1/34 ($0.44/$0.87 per M)",
+     "평가: '가성비 1위', 수학·코드 특화 / BenchLM 중국모델 1위(88점)"], BLUE)
+bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(3.05), "Qwen3.7-Max (Alibaba·프로프라이어터리)",
+    ["에이전트 특화 플래그십·1M 맥락·네이티브 확장 사고",
+     "SWE-Bench Pro 60.6%, Terminal-Bench 2.0 69.7%, GPQA 92.4%",
+     "프런티어 중 최저 환각률 22.9% 보고",
+     "평가: 'Agent·멀티스텝 벤치 SOTA' / 장기 코딩 에이전트 우위"], ACCENT)
+box(s, Inches(0.55), Inches(4.65), Inches(12.25), Inches(2.05), fill=PEACH, line=ACCENT, line_w=1.4, round_=True)
+text(s, Inches(0.8), Inches(4.78), Inches(11.85), Inches(1.8),
+     [[("도입 주의 (HW팀 보안 관점)", 14, ACCENT, True)],
+      [("\u2022 데이터 거버넌스: 미국·국내 관할 데이터 레지던시 보장 미흡 \u2192 사내 보안·법무 검토 필수", 12, RED, True)],
+      [("\u2022 HW 설계·소스코드 등 민감 정보 입력 금지 권고 (외부 전송 위험)", 12, GRAY, False)],
+      [("\u2022 수치는 자가보고·제3자 벤치 혼재 \u2192 도입 전 사내 PoC로 재검증 (Gauss 보조 용도)", 12, GRAY, False)]],
+     line_spacing=1.1, space_after=2)
+pnum(s, 17)
+
 # Slide 14 — 출처
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (16/16)", "출처")
+header(s, "외부 AI 3종 비교  (17/17)", "출처")
 sources = [
     ("공식", "OpenAI / Google Gemini / Anthropic Claude 문서"),
     ("Reddit", "Foxafox 요약, RoboRhythms, TechRadar, ClaudeMeter, OpenTools"),
-    ("GitHub", "Haseeb Qureshi Gist, rohittcodes/claude-vs-codex, claude-code·gemini-cli Issues, arXiv 20,574 세션"),
+    ("GitHub", "Haseeb Qureshi Gist, rohittcodes/claude-vs-codex, claude-code·gemini-cli Issues"),
     ("설문", "JetBrains'26, digitalapplied, Ivern(312명), Stack Overflow'25"),
     ("Slack·Discord", "editorialge, blockchain-council, State of AI Coding 2026"),
-    ("X·참고", "Vapvarun, CatDoes, Medium 2026 field report"),
+    ("중국 LLM", "aimlapi, benchlm.ai, qwen3lm, techjacksolutions, DataCamp"),
     ("문서", "외부AI_3종_비교조사.md + 유저평가_비교조사.md"),
 ]
 y = Inches(1.55)
@@ -493,7 +515,7 @@ text(s, Inches(0.7), Inches(5.5), Inches(12), Inches(1.2),
      [[("상세 URL은 동봉 마크다운 '외부AI_3종_비교조사.md' 참조", 11, LGRAY, False)],
       [("모델명·기능은 도입 시점에 공식 페이지에서 재확인 필요", 11, LGRAY, False)]],
      line_spacing=1.1)
-pnum(s, 17)
+pnum(s, 18)
 
 prs.save("외부AI_3종_비교조사.pptx")
 print("saved:", len(prs.slides._sldIdLst), "slides")

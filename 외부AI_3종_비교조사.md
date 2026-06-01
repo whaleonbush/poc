@@ -97,3 +97,30 @@
 6. Gemini Enterprise Capabilities — https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/supported-capabilities  
 7. Claude Models Overview — https://platform.claude.com/docs/en/about-claude/models/overview  
 8. Anthropic — https://www.anthropic.com/
+
+---
+
+## 7. (부록) 중국 LLM 상위 2종 — 강점 및 평가 (참고)
+
+> 2026년 6월 기준, 독립 벤치/리더보드에서 가장 상위로 일관되게 평가받는 중국 모델은 **DeepSeek V4 Pro**와 **Alibaba Qwen3.7-Max** 입니다. (그 외 Kimi K2.6, Zhipu GLM-5.1도 상위권)
+
+| 모델 | 강점 | 대표 벤치/평가 | 비용·라이선스 |
+|------|------|----------------|----------------|
+| **DeepSeek V4 Pro** | 코딩·수학 특화, 비용 효율, 자체 호스팅 | LiveCodeBench 93.5%(오픈모델 1위), SWE-Bench Verified 80.6%, BenchLM 중국모델 1위(88) | $0.44/$0.87 per M (GPT-5.5의 약 1/34), **MIT 오픈웨이트**, 1M 맥락 |
+| **Qwen3.7-Max** | 에이전트·멀티스텝, 장기 코딩 | SWE-Bench Pro 60.6%, Terminal-Bench 2.0 69.7%, GPQA 92.4%, 환각률 22.9%(최저) | 프로프라이어터리(API), 1M 맥락, 네이티브 확장 사고 |
+
+### 유저·시장 평가 요약
+- DeepSeek V4 Pro: "예산 제약 + 코딩 품질"이면 가장 먼저 평가할 모델. 서방 프런티어 대비 출력 비용 ~34배 저렴, 오픈웨이트라 자체 호스팅 가능 → **망분리 환경 잠재 후보**.
+- Qwen3.7-Max: 에이전트 벤치 SOTA. 단, **미국·국내 관할 데이터 레지던시 보장이 아직 없음**(공식 단서).
+
+### HW팀 도입 주의 (보안 관점)
+- **데이터 거버넌스**: 데이터 레지던시·관할 보장 미흡 → 사내 보안·법무 검토 필수.
+- **민감 정보 금지**: HW 설계·소스코드·미공개 사양 입력 금지 권고 (외부 전송 위험).
+- **수치 주의**: 일부는 자가보고 벤치 → 도입 전 사내 PoC로 재검증. 사내 Gauss 보조 용도로만 한정 검토.
+
+### 출처 (중국 LLM)
+- https://aimlapi.com/blog/top-llm-models-in-2026-the-best-ai-models-for-reasoning-coding-multimodal-tasks
+- https://benchlm.ai/best/chinese-models
+- https://qwen3lm.com/qwen3.6-deepseek/
+- https://techjacksolutions.com/ai-tools/qwen/qwen-vs-deepseek/
+- https://www.datacamp.com/blog/qwen3-7-max
