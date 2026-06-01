@@ -115,7 +115,7 @@ pnum(s, 1)
 
 # Slide 2 — 보고 목적
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (1/14)", "보고 목적 및 평가 기준")
+header(s, "외부 AI 3종 비교  (1/16)", "보고 목적 및 평가 기준")
 section(s, Inches(0.55), Inches(1.2), Inches(6), "왜 지금 비교하나")
 text(s, Inches(0.7), Inches(1.65), Inches(12), Inches(1.0),
      [[("2026년 6월부터 외부 AI 도입을 검토합니다. 도입 전 ChatGPT·Gemini·Claude 각각의", 13, GRAY, False)],
@@ -145,7 +145,7 @@ pnum(s, 2)
 
 # Slide 3 — 3종 한눈에
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (2/14)", "3종 한눈에 보기")
+header(s, "외부 AI 3종 비교  (2/16)", "3종 한눈에 보기")
 table_simple(
     s, Inches(0.55), Inches(1.55),
     ["AI", "한 줄 포지션", "강점 (공식·참고)", "주의"],
@@ -166,7 +166,7 @@ pnum(s, 3)
 
 # Slide 4 — ChatGPT
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (3/14)", "ChatGPT (OpenAI)")
+header(s, "외부 AI 3종 비교  (3/16)", "ChatGPT (OpenAI)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["GPT-5.5: 복잡 추론·코딩용 플래그십 (맥락 약 100만 토큰)",
      "Responses API: 추론·도구·웹/파일 검색·Computer Use",
@@ -185,7 +185,7 @@ pnum(s, 4)
 
 # Slide 5 — Gemini
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (4/14)", "Gemini (Google)")
+header(s, "외부 AI 3종 비교  (4/16)", "Gemini (Google)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["Gemini 3.5 Flash: 에이전트·코딩·멀티모달 (2026.5 GA)",
      "Google Search·File Search·URL Context 그라운딩",
@@ -204,7 +204,7 @@ pnum(s, 5)
 
 # Slide 6 — Claude
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (5/14)", "Claude (Anthropic)")
+header(s, "외부 AI 3종 비교  (5/16)", "Claude (Anthropic)")
 bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(2.5), "공식 강점",
     ["Opus 4.6/4.7, Sonnet 4.6: 복잡 추론·장기 에이전트 코딩",
      "맥락 최대 100만 토큰 (Opus/Sonnet 4.6)",
@@ -223,7 +223,7 @@ pnum(s, 6)
 
 # Slide 7 — 기능 비교 매트릭스
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (6/14)", "기능 비교 매트릭스")
+header(s, "외부 AI 3종 비교  (6/16)", "기능 비교 매트릭스")
 table_simple(
     s, Inches(0.45), Inches(1.5),
     ["항목", "ChatGPT", "Gemini", "Claude"],
@@ -246,17 +246,15 @@ pnum(s, 7)
 
 # Slide 8 — 유저 평가 조사 방법
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (8/14)", "Reddit · X · GitHub — 조사 방법")
-section(s, Inches(0.55), Inches(1.2), Inches(6), "수집 범위")
-text(s, Inches(0.7), Inches(1.6), Inches(5.8), Inches(2.2),
-     [[("Reddit: ChatGPT vs Claude vs Gemini 비교 스레드,", 12, GRAY, False)],
-      [("고득표 사용자 경험 글 (요약·인용 기사 포함)", 12, GRAY, False)],
-      [("", 6, GRAY, False)],
+header(s, "유저 평가 기반 비교  (7/16)", "Reddit · X · GitHub · Slack · Discord — 조사 방법")
+section(s, Inches(0.55), Inches(1.2), Inches(6), "수집 범위 (5개 채널)")
+text(s, Inches(0.7), Inches(1.6), Inches(5.8), Inches(2.4),
+     [[("Reddit: 비교·불만 스레드, 고득표(수천 upvotes) 글", 12, GRAY, False)],
       [("X: 개발자·빌더 커뮤니티, 2025~26 Claude 전환 논의", 12, GRAY, False)],
-      [("", 6, GRAY, False)],
-      [("GitHub: Gist 비교, claude-vs-codex 리포,", 12, GRAY, False)],
-      [("openai/codex Discussions, 비교 문서", 12, GRAY, False)]],
-     line_spacing=1.08)
+      [("GitHub: Gist·claude-vs-codex 리포, 공식 Issues", 12, GRAY, False)],
+      [("Slack: 팀 협업·요약·엔터프라이즈 연동 사용기", 12, GRAY, False)],
+      [("Discord: 코딩 커뮤니티 서버·원격 제어·설문 배포", 12, GRAY, False)]],
+     line_spacing=1.28)
 box(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(2.6), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
 text(s, Inches(6.95), Inches(1.5), Inches(5.65), Inches(2.3),
      [[("주의 (한계)", 14, ACCENT, True)],
@@ -276,30 +274,103 @@ pnum(s, 8)
 
 # Slide 9 — 플랫폼별 유저 목소리
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (9/14)", "플랫폼별에서 들리는 목소리")
+header(s, "유저 평가 기반 비교  (8/16)", "플랫폼별에서 들리는 목소리")
 table_simple(
-    s, Inches(0.55), Inches(1.5),
+    s, Inches(0.55), Inches(1.4),
     ["플랫폼", "ChatGPT", "Gemini", "Claude"],
     [
         ["Reddit", "만능 칼: 음성·이미지·검색", "Google 앱 통합 편함", "글·코드 품질, 한도 불만"],
         ["X·개발자", "Codex 속도·위임", "Workspace·긴 문서", "빌더층 이동·Claude Code"],
         ["GitHub", "Codex 샌드박스·비용", "무료 티어 보완용", "hooks·plugins·코드 품질"],
+        ["Slack", "RAG 연결 비서", "Workspace·Meet 요약", "긴 문서·정책 분석"],
+        ["Discord", "빠른 질문·이미지", "설문·토론 활발", "MCP 원격 코딩 제어"],
     ],
     col_w=[Inches(1.5), Inches(3.5), Inches(3.5), Inches(3.75)],
-    row_h=Inches(0.85), fsize=11.5, hsize=12
+    row_h=Inches(0.6), fsize=11, hsize=12
 )
-box(s, Inches(0.55), Inches(4.5), Inches(12.25), Inches(2.2), fill=SKY, line=LINE, line_w=1, round_=True)
-text(s, Inches(0.8), Inches(4.65), Inches(11.8), Inches(1.9),
+box(s, Inches(0.55), Inches(4.85), Inches(12.25), Inches(1.85), fill=SKY, line=LINE, line_w=1, round_=True)
+text(s, Inches(0.8), Inches(4.98), Inches(11.8), Inches(1.6),
      [[("대표 인용 패턴 (참고)", 13, BLUE, True)],
       [("ChatGPT: \"Swiss army knife\" — 빠르고 넓지만 프로덕션 코드는 Claude가 낫다는 의견", 11.5, GRAY, False)],
       [("Gemini: \"검색 레이어\" vs \"긴 문서는 최고\" — 코딩은 평가 갈림", 11.5, GRAY, False)],
       [("Claude: \"scalpel\" — 멀티파일·리팩터링 호평, 느리고 한도 걸린다는 불만", 11.5, GRAY, False)]],
-     line_spacing=1.08, space_after=2)
+     line_spacing=1.06, space_after=2)
 pnum(s, 9)
+
+# Slide 9b — Slack · Discord 커뮤니티 사용기 (신규)
+s = add_slide(); set_bg(s, WHITE)
+header(s, "유저 평가 기반 비교  (9/16)", "Slack · Discord 커뮤니티 사용기")
+bullet_card(s, Inches(0.55), Inches(1.35), Inches(6.0), Inches(3.0), "Slack (팀 협업 관점)",
+    ["Slack AI: 스레드 요약·액션아이템 추출 효율 호평",
+     "ChatGPT: Slack·Git·Confluence에 RAG로 연결한 '프론트도어 비서' 사례",
+     "엔터프라이즈: 'Slack \u2192 작업(task) 자동화' 가능 여부를 비교 기준으로 둠",
+     "Gemini: Workspace·Meet 요약과 함께 묶어서 평가"], BLUE)
+bullet_card(s, Inches(6.75), Inches(1.35), Inches(6.05), Inches(3.0), "Discord (개발자 커뮤니티)",
+    ["Claude Code를 Discord에서 원격 제어(MCP) — 폰으로 코딩 지시·결과 수신",
+     "AI 코딩 설문이 Discord 채널로 배포될 만큼 토론 활발 (Ivern 312명 등)",
+     "단골 주제: 도구 갈아타기 · 한도 · 비용 · 신뢰(틀린 코드)",
+     "커뮤니티 톤: '하나만 쓰지 않고 스택으로 쓴다'"], ACCENT)
+box(s, Inches(0.55), Inches(4.65), Inches(12.25), Inches(2.0), fill=NAVY, round_=True)
+text(s, Inches(0.8), Inches(4.8), Inches(11.8), Inches(1.7),
+     [[("HW팀 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("\u2022 팀 단위 활용은 Slack 요약/액션아이템부터 — 회의록·시험결과 공유에 즉시 효과", 12, WHITE, False)],
+      [("\u2022 Discord·MCP 원격 제어는 보안상 사내 정책 검토 후에만 (외부 연동 주의)", 12, WHITE, False)]],
+     line_spacing=1.12, space_after=2)
+pnum(s, 10)
+
+# Slide 9c — 정량 데이터 (설문·통계) (신규)
+s = add_slide(); set_bg(s, WHITE)
+header(s, "유저 평가 기반 비교  (10/16)", "정량 데이터 (제3자 설문·통계, 참고)")
+table_simple(
+    s, Inches(0.5), Inches(1.45),
+    ["지표", "수치", "출처"],
+    [
+        ["'가장 사랑하는' 코딩툴", "Claude Code 46% · Cursor 19% · Copilot 9%", "JetBrains'26"],
+        ["1차 사용 도구 점유율", "Claude Code 28% · Cursor 24% · Copilot 17% · Codex 11%", "digitalapplied"],
+        ["전체 사용(any-use)", "Copilot 58% · Claude Code 54% · Cursor 49%", "digitalapplied"],
+        ["멀티툴 동시 사용", "개발자 70~73%가 2개 이상 사용", "Awesome/Ivern"],
+        ["멀티에이전트 시간 절감", "11.4h/주 (단일툴 5.2h)", "Ivern 312명"],
+        ["AI 도입 vs 신뢰", "도입 84% · 신뢰 29% (전년比 -11p)", "Stack Overflow'25"],
+    ],
+    col_w=[Inches(3.0), Inches(7.0), Inches(2.3)], row_h=Inches(0.58), fsize=11, hsize=11.5
+)
+box(s, Inches(0.5), Inches(5.5), Inches(12.3), Inches(1.2), fill=PEACH, line=ACCENT, line_w=1.2, round_=True)
+text(s, Inches(0.75), Inches(5.62), Inches(11.8), Inches(1.0),
+     [[("읽는 법 (주의)", 13, ACCENT, True)],
+      [("표본·방법이 서로 다른 제3자 설문 \u2192 '순위'보다 '경향'으로 해석. ", 11.5, GRAY, False)],
+      [("'GPT-5 horrible' 4,600 upvotes, 해지 1.5M 등 언론 인용 수치는 공식 미검증.", 11.5, RED, False)]],
+     line_spacing=1.08, space_after=2)
+pnum(s, 11)
+
+# Slide 9d — AI별 실사용 불만 상세 (신규)
+s = add_slide(); set_bg(s, WHITE)
+header(s, "유저 평가 기반 비교  (11/16)", "AI별 실사용 불만 (상세)")
+bullet_card(s, Inches(0.45), Inches(1.4), Inches(4.05), Inches(3.6), "ChatGPT",
+    ["GPT-5 전환 후 '답 짧음·개성↓·다단계 추론↓' 대규모 불만",
+     "Plus 사용 한도(주당 thinking 메시지) 체감",
+     "피크시간 품질 변동",
+     "안전필터 과도한 거절"], BLUE)
+bullet_card(s, Inches(4.65), Inches(1.4), Inches(4.05), Inches(3.6), "Gemini",
+    ["'코드 바꾸지 말고 분석만' 지시 무시 등 지시 불이행",
+     "자율 과잉: 340파일 변경·28,745줄 삭제 + 허위 점검 로그 사건",
+     "멀티스텝에서 워크플로 상태 상실",
+     "소비자용 UX(파일 생성·검색 제어 제약)"], ACCENT)
+bullet_card(s, Inches(8.85), Inches(1.4), Inches(4.0), Inches(3.6), "Claude",
+    ["Rate limit 최대 불만: 주간 캡 1~2일 소진·경고 없이 차단",
+     "8개 사용량 버킷 중 하나만 100%여도 throttle",
+     "claude.ai·Code·Design 한도 통합 \u2192 한 곳 쓰면 다른 곳↓",
+     "상대적으로 느리고 비쌈"], RED)
+box(s, Inches(0.45), Inches(5.25), Inches(12.4), Inches(1.45), fill=NAVY, round_=True)
+text(s, Inches(0.7), Inches(5.4), Inches(11.9), Inches(1.15),
+     [[("HW팀 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
+      [("사내 Gauss의 '분당 3~4회 제한'처럼, 외부 AI도 '사용 한도'가 실무 병목이 됩니다.", 12, WHITE, False)],
+      [("\u2192 PoC에서 한도·속도·코드 신뢰도(틀린 코드 비율)를 반드시 직접 측정하세요.", 12, WHITE, False)]],
+     line_spacing=1.1, space_after=2)
+pnum(s, 12)
 
 # Slide 10 — 유저 평가 업무별 비교
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (10/14)", "업무별 유저 평가 (HW 관점)")
+header(s, "유저 평가 기반 비교  (12/16)", "업무별 유저 평가 (HW 관점)")
 table_simple(
     s, Inches(0.55), Inches(1.48),
     ["업무", "ChatGPT", "Gemini", "Claude"],
@@ -322,11 +393,11 @@ text(s, Inches(0.8), Inches(5.7), Inches(11.8), Inches(1.05),
       [("Claude Code(코딩) + Gemini(긴 사양서·OCR) + ChatGPT(만능·음성·빠른 질문)", 12, WHITE, False)],
       [("HW팀 PoC: 업무별로 2주씩 써 보고 한도·속도·실수율을 직접 측정 권장", 12, WHITE, False)]],
      line_spacing=1.1, space_after=2)
-pnum(s, 10)
+pnum(s, 13)
 
 # Slide 11 — 공식 vs 유저
 s = add_slide(); set_bg(s, WHITE)
-header(s, "유저 평가 기반 비교  (11/14)", "공식 소개 vs 유저 평가 — 차이")
+header(s, "유저 평가 기반 비교  (13/16)", "공식 소개 vs 유저 평가 — 차이")
 table_simple(
     s, Inches(0.55), Inches(1.5),
     ["AI", "공식이 말하는 것", "유저가 추가로 말하는 것"],
@@ -344,11 +415,11 @@ text(s, Inches(0.8), Inches(5.3), Inches(11.8), Inches(1.45),
       [("2. 유저 후기로 '매일 쓸 때 불편한지' PoC에서 확인 (한도·속도·코드 검증)", 12, GRAY, False)],
       [("3. 사내 Gauss와 역할 분리 — 외부는 보안 승인 후 고급 보조", 12, GRAY, False)]],
      line_spacing=1.1, space_after=2)
-pnum(s, 11)
+pnum(s, 14)
 
 # Slide 12 — HW팀 시사점 + 선택 가이드
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (12/14)", "HW 개발팀 적용 및 선택 가이드")
+header(s, "외부 AI 3종 비교  (14/16)", "HW 개발팀 적용 및 선택 가이드")
 table_simple(
     s, Inches(0.55), Inches(1.5),
     ["업무", "우선 검토", "이유 (쉬운 말)"],
@@ -368,11 +439,11 @@ text(s, Inches(0.8), Inches(5.5), Inches(11.8), Inches(1.05),
       [("코딩 중심 \u2192 Claude  |  긴 사양서·검색 \u2192 Gemini  |  범용·도구 연결 \u2192 ChatGPT", 12, GRAY, False)],
       [("복수 도입·역할 분담 권장 (예: Claude 코딩 + Gemini 문서)", 12, GRAY, False)]],
      line_spacing=1.1, space_after=2)
-pnum(s, 12)
+pnum(s, 15)
 
 # Slide 13 — 결론
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (13/14)", "결론 및 제언")
+header(s, "외부 AI 3종 비교  (15/16)", "결론 및 제언")
 cols = [
     ("당장 PoC 가능", GREEN, ["코드·문서 초안", "측정 데이터 정리", "로그 분석", "반복 업무 자동화"]),
     ("신중 적용", ACCENT, ["회로·부품 최종 판단", "불량 원인 확정", "양산 영향 평가"]),
@@ -394,16 +465,18 @@ text(s, Inches(0.9), Inches(5.1), Inches(11.5), Inches(1.25),
       [("외부 AI는 사내 Gauss를 대체하기보다, 보안 검토 후 '고급 보조'로 쓰는 것이 현실적입니다.", 12.5, WHITE, False)],
       [("6월 도입 전: 업무별 PoC 1~2건 선정 \u2192 효과·보안 측정 \u2192 팀 표준 가이드화를 제안합니다.", 12.5, WHITE, False)]],
      line_spacing=1.1, space_after=2)
-pnum(s, 13)
+pnum(s, 16)
 
 # Slide 14 — 출처
 s = add_slide(); set_bg(s, WHITE)
-header(s, "외부 AI 3종 비교  (14/14)", "출처")
+header(s, "외부 AI 3종 비교  (16/16)", "출처")
 sources = [
     ("공식", "OpenAI / Google Gemini / Anthropic Claude 문서"),
-    ("Reddit", "Foxafox Reddit 요약, DreamHost Reddit 인용"),
-    ("GitHub", "Haseeb Qureshi Gist, rohittcodes/claude-vs-codex, codex Discussions"),
-    ("X·참고", "Vapvarun, CatDoes, Ken Imoto, TechTide, Playcode"),
+    ("Reddit", "Foxafox 요약, RoboRhythms, TechRadar, ClaudeMeter, OpenTools"),
+    ("GitHub", "Haseeb Qureshi Gist, rohittcodes/claude-vs-codex, claude-code·gemini-cli Issues, arXiv 20,574 세션"),
+    ("설문", "JetBrains'26, digitalapplied, Ivern(312명), Stack Overflow'25"),
+    ("Slack·Discord", "editorialge, blockchain-council, State of AI Coding 2026"),
+    ("X·참고", "Vapvarun, CatDoes, Medium 2026 field report"),
     ("문서", "외부AI_3종_비교조사.md + 유저평가_비교조사.md"),
 ]
 y = Inches(1.55)
@@ -418,7 +491,7 @@ text(s, Inches(0.7), Inches(5.5), Inches(12), Inches(1.2),
      [[("상세 URL은 동봉 마크다운 '외부AI_3종_비교조사.md' 참조", 11, LGRAY, False)],
       [("모델명·기능은 도입 시점에 공식 페이지에서 재확인 필요", 11, LGRAY, False)]],
      line_spacing=1.1)
-pnum(s, 14)
+pnum(s, 17)
 
 prs.save("외부AI_3종_비교조사.pptx")
 print("saved:", len(prs.slides._sldIdLst), "slides")
