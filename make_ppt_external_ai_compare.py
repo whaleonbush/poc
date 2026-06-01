@@ -108,7 +108,7 @@ text(s, Inches(0.9), Inches(1.8), Inches(11.5), Inches(1.5),
       [("ChatGPT  \u00b7  Gemini  \u00b7  Claude", 22, RGBColor(0x9F,0xC4,0xE8), True)]],
      line_spacing=1.1)
 text(s, Inches(0.92), Inches(4.2), Inches(11.5), Inches(0.8),
-     [[("삼성전자 스마트폰 HW 개발팀  |  2026년 6월 외부 AI 도입 검토", 15, RGBColor(0xC9,0xD8,0xEA), False)],
+     [[("NC HW 개발팀  |  2026년 6월 외부 AI 도입 검토", 15, RGBColor(0xC9,0xD8,0xEA), False)],
       [("공식 문서 및 웹 사용자 평가 교차 검증", 13, LGRAY, False)]])
 pnum(s, 1)
 
@@ -364,11 +364,11 @@ bullet_card(s, Inches(8.85), Inches(1.4), Inches(4.0), Inches(3.6), "Claude",
      "claude.ai·Code·Design 한도 통합 \u2192 한 곳 쓰면 다른 곳↓",
      "상대적으로 느리고 비쌈"], RED)
 box(s, Inches(0.45), Inches(5.25), Inches(12.4), Inches(1.45), fill=NAVY, round_=True)
-text(s, Inches(0.75), Inches(5.25), Inches(11.85), Inches(1.45),
+text(s, Inches(0.8), Inches(5.25), Inches(11.7), Inches(1.45),
      [[("HW 개발 시사점", 14, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("\u2022 사내 Gauss의 분당 3~4회 호출 제한과 마찬가지로, 외부 LLM도 사용 한도가 실무 병목 요인", 12, WHITE, False)],
-      [("\u2022 PoC 단계에서 사용 한도·응답 속도·코드 신뢰도(오류율)를 정량 측정 권장", 12, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.22, space_after=3)
+      [("\u2022 사내 Gauss(분당 3~4회 제한)처럼, 외부 LLM도 사용 한도가 실무 병목 요인", 11.5, WHITE, False)],
+      [("\u2022 PoC 단계에서 사용 한도·응답 속도·코드 오류율을 정량 측정 권장", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.25, space_after=4)
 pnum(s, 12)
 
 # Slide 10 — 유저 평가 업무별 비교
@@ -471,11 +471,11 @@ for i, (title, color, items) in enumerate(concl):
              [[("\u2022 " + item, 11, GRAY, False)]], line_spacing=1.02)
         yy += Inches(0.62)
 box(s, Inches(0.55), Inches(4.72), Inches(12.3), Inches(1.78), fill=NAVY, round_=True)
-text(s, Inches(0.85), Inches(4.72), Inches(11.65), Inches(1.78),
+text(s, Inches(0.85), Inches(4.72), Inches(11.6), Inches(1.78),
      [[("종합 결론 및 도입 제언", 15, RGBColor(0x9F,0xC4,0xE8), True)],
-      [("\u2022 외부 LLM은 사내 Gauss(망분리 보조)를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할 분담", 12, WHITE, False)],
-      [("\u2022 권장안: 업무별 PoC 1~2건 선정 \u2192 효과·보안·사용 한도 정량 측정 \u2192 팀 표준 활용 가이드 수립", 12, WHITE, False)]],
-     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.22, space_after=3)
+      [("\u2022 외부 LLM은 사내 Gauss를 대체하지 않고, 보안 검토 후 고급 보조 수단으로 역할 분담", 11.5, WHITE, False)],
+      [("\u2022 업무별 PoC 1~2건 \u2192 효과·보안·사용 한도 측정 \u2192 팀 표준 활용 가이드 수립", 11.5, WHITE, False)]],
+     anchor=MSO_ANCHOR.MIDDLE, line_spacing=1.25, space_after=4)
 pnum(s, 16)
 
 # Slide 13b — 중국 LLM 상위 2종 vs ChatGPT (신규, 참고)
